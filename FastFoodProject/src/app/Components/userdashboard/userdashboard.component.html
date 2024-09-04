@@ -1,0 +1,21 @@
+<div class="dashboard-container">
+    <header class="header">
+      <button (click)="toggleMenu()" class="menu-button">Menu</button>
+      <h1>Raayan Fast Foods</h1>
+    </header>
+  
+    <div class="main-content">
+      <div *ngIf="showMenu" class="nav-menu">
+        <ul>
+          <li *ngFor="let item of fastFoodItems">
+            <a [routerLink]="item.link">{{ item.name }}</a>
+          </li>
+        </ul>
+      </div>
+  
+      <div class="content">
+        <router-outlet></router-outlet> <!-- Display routed content here -->
+      </div>
+    </div>
+  </div>
+  

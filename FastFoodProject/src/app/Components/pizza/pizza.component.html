@@ -1,0 +1,18 @@
+<div class="pizza-container">
+    <button (click)="navigateToAddFoodItem()" class="btn btn-primary">Add Pizza Item</button>
+  
+    <div class="pizza-items-list">
+      <div class="card" *ngFor="let item of pizzaItems">
+        <div class="card-body">
+          <h5 class="card-title">{{ item.name }}</h5>
+          <p class="card-text">{{ item.description }}</p>
+          <p class="card-text">Price: ${{ item.price }}</p>
+          <img [src]="item.imageUrl" alt="{{ item.name }}" class="card-img-top"/>
+          <p class="card-text">Type: {{ item.foodType }}</p>
+          <button (click)="navigateToUpdateFoodItem(item.id)" class="btn btn-warning">Update</button>
+          <button (click)="deleteFoodItem(item.id)" class="btn btn-danger">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,78 @@
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    margin-top: 32px;
+  }
+  
+  .main-content {
+    display: flex;
+    flex-grow: 1;
+  }
+  
+  .sidebar {
+    width: 250px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    position: relative;
+  }
+  
+  .menu-button {
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100px;
+    text-align: left;
+    font-weight: bold;
+    margin-right: auto; /* This moves the button to the left */
+  }
+  
+  
+  .nav-menu {
+    margin-top: 20px;
+    background-color: #fff8e1;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .nav-menu ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .nav-menu li {
+    margin-bottom: 10px;
+  }
+  
+  .nav-menu li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .nav-menu li a:hover {
+    color: #ff9800;
+  }
+  
+  .content {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  
+  .header h1 {
+    margin: 0;
+    padding-left: 20px; /* Adds some space between the menu button and the title */
+  }

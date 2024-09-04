@@ -1,0 +1,46 @@
+.manage-items-container {
+    display: flex;
+  }
+  
+  .menu-button {
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-right: 20px;
+  }
+  
+  .side-nav {
+    width: 200px;
+    background-color: #333;
+    padding: 10px;
+  }
+  
+  .side-nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .side-nav li {
+    margin: 10px 0;
+  }
+  
+  .side-nav a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .content {
+    margin-left: 20px;
+    flex-grow: 1;
+    margin-top: 32px
+  }
+  
+  
+dl, ol, ul {
+    margin-top: 32px;
+    margin-bottom: 1rem;
+}

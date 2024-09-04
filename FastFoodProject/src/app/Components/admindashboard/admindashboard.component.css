@@ -1,0 +1,47 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    margin-top: 32px;
+  }
+  
+  .menu-button {
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100px;
+    text-align: left;
+    font-weight: bold;
+    margin-right: 20px; /* Adds space between the menu button and the title */
+  }
+  
+  .header h1 {
+    margin: 0;
+  }
+  
+  .sidebar {
+    width: 200px; /* Adjust as needed */
+    background-color: #f4f4f4;
+    padding: 15px;
+  }
+  
+  .nav-menu ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .nav-menu li {
+    margin: 10px 0;
+  }
+  
+  .nav-menu a {
+    text-decoration: none;
+    color: #333;
+  }
+  

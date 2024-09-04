@@ -1,0 +1,29 @@
+/* src/app/app.component.css */
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+  
+  
+  
+  app-navbar {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    /* Ensure the navbar does not shrink */
+  }
+  
+  .content {
+    flex: 1; /* Allows the content to grow and fill available space */
+    padding: 20px;
+    background-color: #f4f4f4; /* Optional: Add a background color for content area */
+  }
+  
+  app-footer {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    padding: 10px;
+    text-align: center;
+    border-top: 1px solid #e1e1e1;
+  }
+  
