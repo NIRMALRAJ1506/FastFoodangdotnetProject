@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FastFoodApi.Migrations
 {
     [DbContext(typeof(FoodContext))]
-    [Migration("20240904123252_FoodItemsMig")]
-    partial class FoodItemsMig
+    [Migration("20240904163309_FoodMig")]
+    partial class FoodMig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

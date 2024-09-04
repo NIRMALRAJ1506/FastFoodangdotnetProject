@@ -9,6 +9,7 @@ import axios from 'axios';
 })
 export class PizzaComponent implements OnInit {
   pizzaItems: any[] = [];
+  foodType: string = 'Pizza'; // Directly set to 'Pizza'
 
   constructor(private router: Router) {}
 
@@ -18,15 +19,18 @@ export class PizzaComponent implements OnInit {
 
   async loadPizzaItems() {
     try {
-      const response = await axios.get('http://localhost:5270/api/fooditems/pizza'); // Adjust the URL to your API endpoint
+      const response = await axios.get('http://localhost:5270/api/fooditems', {
+        params: { type: this.foodType } // This will append ?type=Pizza to the URL
+      });
       this.pizzaItems = response.data;
     } catch (error) {
       console.error('Error loading pizza items', error);
     }
   }
+  
 
   navigateToAddFoodItem() {
-    this.router.navigate(['/add-food-item'], { queryParams: { type: 'Pizza' } });
+    this.router.navigate(['/add-food-item'], { queryParams: { type: this.foodType } });
   }
 
   navigateToUpdateFoodItem(id: number) {

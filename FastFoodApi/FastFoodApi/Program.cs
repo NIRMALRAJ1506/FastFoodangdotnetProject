@@ -13,7 +13,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowSpecificOrigin",
         builder =>
         {
-            builder.WithOrigins("http://localhost:55777") // Replace with the actual URL of your Angular app
+            builder.WithOrigins("http://localhost:4200") // Replace with the actual URL of your Angular app
                    .AllowAnyHeader()
                    .AllowAnyMethod()
                    .AllowCredentials();

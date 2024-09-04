@@ -7,7 +7,7 @@
           <h5 class="card-title">{{ item.name }}</h5>
           <p class="card-text">{{ item.description }}</p>
           <p class="card-text">Price: ${{ item.price }}</p>
-          <img [src]="item.imageUrl" alt="{{ item.name }}" class="card-img-top"/>
+          <img [src]="item.ImgUrl" alt="{{ item.name }}" class="card-img-top"/>
           <p class="card-text">Type: {{ item.foodType }}</p>
           <button (click)="navigateToUpdateFoodItem(item.id)" class="btn btn-warning">Update</button>
           <button (click)="deleteFoodItem(item.id)" class="btn btn-danger">Delete</button>
