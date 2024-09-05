@@ -38,13 +38,7 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
-      {
-        "Name": "type",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
+    "Parameters": [],
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[FastFoodApi.Models.FoodItem, FastFoodApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",

@@ -11,7 +11,9 @@ import { ManageitemsComponent } from './Components/manageitems/manageitems.compo
 import { PizzaComponent } from './Components/pizza/pizza.component';
 import { FooditemformComponent } from './Components/fooditemform/fooditemform.component';
 
-const routes: Routes = [ {path:"home",component:HomeComponent},
+const routes: Routes = [ 
+  {path:"",component:HomeComponent},
+  {path:"home",component:HomeComponent},
   {path:"login",component:LoginComponent},
 {path:"signup",component:SignupComponent},
 {path:"aboutus",component:AboutusComponent},

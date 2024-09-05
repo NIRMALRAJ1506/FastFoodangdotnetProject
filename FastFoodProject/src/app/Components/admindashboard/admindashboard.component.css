@@ -1,47 +1,93 @@
+/* General styles for the dashboard */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    background-color: #333;
-    color: white;
-    padding: 15px;
-    margin-top: 32px;
-  }
-  
-  .menu-button {
-    background-color: #ff9800;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    width: 100px;
-    text-align: left;
-    font-weight: bold;
-    margin-right: 20px; /* Adds space between the menu button and the title */
-  }
-  
-  .header h1 {
-    margin: 0;
-  }
-  
-  .sidebar {
-    width: 200px; /* Adjust as needed */
-    background-color: #f4f4f4;
-    padding: 15px;
-  }
-  
-  .nav-menu ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .nav-menu li {
-    margin: 10px 0;
-  }
-  
-  .nav-menu a {
-    text-decoration: none;
-    color: #333;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #343a40;
+  color: white;
+  padding: 10px;
+}
+
+.menu-button,
+.logout-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.menu-button:hover,
+.logout-button:hover {
+  background-color: #0056b3;
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #f4f4f4;
+  border-right: 1px solid #ddd;
+}
+
+.nav-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.nav-menu li {
+  padding: 10px;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: #007bff;
+  display: block;
+}
+
+.nav-menu a:hover {
+  background-color: #e9ecef;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+}
+
+/* Statistics Section */
+.statistics {
+  display: flex;
+  gap: 30px;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.stat-item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  width: 150px;
+}
+
+.stat-item h2 {
+  margin: 0;
+  font-size: 2em;
+}
+
+.stat-item p {
+  margin: 5px 0 0;
+  color: #555;
+}

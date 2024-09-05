@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
@@ -21,8 +21,10 @@ import { UserService } from './shared/services/user.service';
 import { UserdashboardComponent } from './Components/userdashboard/userdashboard.component';
 import { PizzaComponent } from './Components/pizza/pizza.component';
 import { AdmindashboardComponent } from './Components/admindashboard/admindashboard.component';
-import { ManageitemsComponent } from './Components/manageitems/manageitems.component';
 import { FooditemformComponent } from './Components/fooditemform/fooditemform.component';
+import { AddFoodItemComponent } from './Components/add-food-item/add-food-item.component';
+import { ManageitemsComponent } from './Components/manageitems/manageitems.component';
+
 
 
 @NgModule({
@@ -39,7 +41,8 @@ import { FooditemformComponent } from './Components/fooditemform/fooditemform.co
     PizzaComponent,
     AdmindashboardComponent,
     ManageitemsComponent,
-    FooditemformComponent
+    FooditemformComponent,
+    AddFoodItemComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +51,7 @@ import { FooditemformComponent } from './Components/fooditemform/fooditemform.co
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    FormsModule
   ],
   providers: [
     provideClientHydration(),

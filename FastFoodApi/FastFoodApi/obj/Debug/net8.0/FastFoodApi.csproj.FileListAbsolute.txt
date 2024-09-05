@@ -337,3 +337,5 @@ C:\Users\Nirmal Raj\Desktop\Project\FastFoodangdotnetProject\FastFoodApi\FastFoo
 C:\Users\Nirmal Raj\Desktop\Project\FastFoodangdotnetProject\FastFoodApi\FastFoodApi\obj\Debug\net8.0\FastFoodApi.pdb
 C:\Users\Nirmal Raj\Desktop\Project\FastFoodangdotnetProject\FastFoodApi\FastFoodApi\obj\Debug\net8.0\FastFoodApi.genruntimeconfig.cache
 C:\Users\Nirmal Raj\Desktop\Project\FastFoodangdotnetProject\FastFoodApi\FastFoodApi\obj\Debug\net8.0\ref\FastFoodApi.dll
+C:\Users\nirmalraj.s\Desktop\FastFoodProject\FastFoodApi\FastFoodApi\obj\Debug\net8.0\FastFoodApi.sourcelink.json
+C:\Users\nirmalraj.s\Desktop\FastFoodProject\FastFoodApi\FastFoodApi\bin\Debug\net8.0\FastFoodApi.staticwebassets.runtime.json
