@@ -24,16 +24,17 @@
           <p>Total Items</p>
         </div>
         <div class="stat-item">
-          <h2>{{ totalOrders }}</h2>
-          <p>Total Orders</p>
-        </div>
-        <div class="stat-item">
-          <h2>{{ totalReports }}</h2>
-          <p>Total Reports</p>
+          <h2>{{ totalUsers }}</h2>
+          <p>Total Users</p>
         </div>
       </div>
+
+      <!-- User Registration Chart -->
+      <div class="chart-container">
+        <canvas id="userChart"></canvas>
+      </div>
       
-      <router-outlet></router-outlet> <!-- Display routed content here -->
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

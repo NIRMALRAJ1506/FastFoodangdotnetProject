@@ -16,6 +16,12 @@ namespace FastFoodApi.Controllers
             _context = context;
         }
 
+        [HttpGet("total")]
+        public async Task<IActionResult> GetTotalUsers()
+        {
+            var totalUsers = await _context.Users.CountAsync();
+            return Ok(totalUsers);
+        }
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] AppUser model)
         {

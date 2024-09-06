@@ -131,3 +131,25 @@ body {
     object-fit: cover; 
     border-radius: 8px;
 }
+
+.marquee {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+.marquee-content {
+    display: inline-flex;
+    animation: marquee 20s linear infinite;
+}
+.marquee-content img {
+    border-radius: 8px;
+}
+@keyframes marquee {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(-50%, 0); /* Move by half because we duplicated the images */
+    }
+}

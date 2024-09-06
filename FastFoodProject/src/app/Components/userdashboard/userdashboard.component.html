@@ -1,21 +1,38 @@
 <div class="dashboard-container">
-    <header class="header">
-      <button (click)="toggleMenu()" class="menu-button">Menu</button>
-      <h1>Raayan Fast Foods</h1>
-    </header>
+  <header class="header">
+    <button class="menu-button" (click)="toggleMenu()">Menu</button>
+    <h1>User Dashboard</h1>
+    <button class="logout-button" (click)="logout()">Logout</button>
+  </header>
   
-    <div class="main-content">
-      <div *ngIf="showMenu" class="nav-menu">
+  <div class="main-content">
+    <div class="sidebar" *ngIf="showMenu">
+      <nav class="nav-menu">
         <ul>
-          <li *ngFor="let item of fastFoodItems">
-            <a [routerLink]="item.link">{{ item.name }}</a>
+          <li>
+            <a (click)="filterItemsByType(null)" class="nav-button">Show All</a>
+          </li>
+          <li *ngFor="let type of foodTypes">
+            <a (click)="filterItemsByType(type)">{{ type }}</a>
           </li>
         </ul>
-      </div>
-  
-      <div class="content">
-        <router-outlet></router-outlet> <!-- Display routed content here -->
+      </nav>
+    </div>
+
+    <div class="content">
+      <!-- Food Items Section -->
+      <div class="food-items">
+        <div class="food-card" *ngFor="let item of filteredItems">
+          <img [src]="getImageUrl(item.imgUrl)" alt="{{ item.name }}" class="food-image">
+          <div class="food-info">
+            <h3>{{ item.name }}</h3>
+            <p>{{ item.description }}</p>
+            <p>${{ item.price.toFixed(2) }}</p>
+            <button class="order-now-button" (click)="orderNow(item)">Order Now</button>
+            <button class="add-to-cart-button" (click)="addToCart(item)">Add to Cart</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  
+</div>

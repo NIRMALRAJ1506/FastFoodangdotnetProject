@@ -37,6 +37,8 @@
               }
             ],
             "styles": [
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.css"
             ],
@@ -95,7 +97,6 @@
             ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
-              
               {
                 "glob": "**/*",
                 "input": "public"

@@ -24,7 +24,10 @@ import { AdmindashboardComponent } from './Components/admindashboard/admindashbo
 import { FooditemformComponent } from './Components/fooditemform/fooditemform.component';
 import { AddFoodItemComponent } from './Components/add-food-item/add-food-item.component';
 import { ManageitemsComponent } from './Components/manageitems/manageitems.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -51,7 +54,11 @@ import { ManageitemsComponent } from './Components/manageitems/manageitems.compo
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    NgbModule,
+    NgbCarouselModule,
+    NgChartsModule
   ],
   providers: [
     provideClientHydration(),

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import axios from 'axios';
+import { Chart } from 'chart.js/auto';
 
 @Component({
   selector: 'app-admindashboard',
@@ -10,22 +11,18 @@ import axios from 'axios';
 export class AdmindashboardComponent implements OnInit {
   showMenu = false;
   totalItems: number = 0;
-  totalOrders: number = 0;
-  totalReports: number = 0;
+  totalUsers: number = 0;
+  chart: any;
 
   fastFoodItems = [
-    { name: 'Manage Orders', link: '/admin/manage-orders' },
     { name: 'Manage Items', link: '/manageitems' },
-    { name: 'View Reports', link: '/admin/view-reports' }
   ];
 
   constructor(private router: Router) {}
 
-
   ngOnInit() {
     this.fetchItemCount();
-    this.fetchOrderCount();
-    this.fetchReportCount();
+    this.fetchUserCount();
   }
 
   toggleMenu() {
@@ -42,31 +39,52 @@ export class AdmindashboardComponent implements OnInit {
     }
   }
 
-  // Fetch number of orders (assuming you have an API for orders)
-  async fetchOrderCount() {
+  // Fetch number of users from API and update the chart
+  async fetchUserCount() {
     try {
-      const response = await axios.get('http://localhost:5270/api/Orders');
-      this.totalOrders = response.data.length;
+      const response = await axios.get('http://localhost:5270/api/User/total');
+      this.totalUsers = response.data;
+      this.createUserChart();
     } catch (error) {
-      console.error('Error fetching order count:', error);
+      console.error('Error fetching user count:', error);
     }
   }
 
-  // Fetch number of reports (assuming you have an API for reports)
-  async fetchReportCount() {
-    try {
-      const response = await axios.get('http://localhost:5270/api/Reports');
-      this.totalReports = response.data.length;
-    } catch (error) {
-      console.error('Error fetching report count:', error);
+  createUserChart() {
+    // Check if the code is running in a browser environment
+    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+      const canvas = document.getElementById('userChart') as HTMLCanvasElement;
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        if (this.chart) {
+          this.chart.destroy(); // Clear any existing chart
+        }
+        this.chart = new Chart(ctx!, {
+          type: 'bar',
+          data: {
+            labels: ['Total Users'],
+            datasets: [
+              {
+                label: 'Users',
+                data: [this.totalUsers],
+                backgroundColor: ['#42A5F5'],
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      }
     }
   }
 
   logout() {
-    // Perform any logout operations
-    // Redirect to home
-    // this.router.navigate(['/home']);
     this.router.navigate(['/home']);
-    
   }
 }
