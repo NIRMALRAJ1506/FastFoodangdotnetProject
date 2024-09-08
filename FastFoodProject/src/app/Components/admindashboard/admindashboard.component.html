@@ -1,10 +1,11 @@
+<!-- admindashboard.component.html -->
 <div class="dashboard-container">
   <header class="header">
     <button class="menu-button" (click)="toggleMenu()">Menu</button>
     <h1>Admin Dashboard</h1>
     <button class="logout-button" (click)="logout()">Logout</button>
   </header>
-  
+
   <div class="main-content">
     <div class="sidebar" *ngIf="showMenu">
       <nav class="nav-menu">
@@ -20,20 +21,25 @@
       <!-- Statistics Section -->
       <div class="statistics">
         <div class="stat-item">
-          <h2>{{ totalItems }}</h2>
-          <p>Total Items</p>
+          <h3>Total Items</h3>
+          <p>{{ totalItems }}</p>
         </div>
         <div class="stat-item">
-          <h2>{{ totalUsers }}</h2>
-          <p>Total Users</p>
+          <h3>Total Users</h3>
+          <p>{{ totalUsers }}</p>
+        </div>
+        <div class="stat-item">
+          <h3>Total Orders</h3>
+          <p>{{ totalOrders }}</p>
         </div>
       </div>
-
-      <!-- User Registration Chart -->
+      
+      <!-- Chart Section -->
       <div class="chart-container">
         <canvas id="userChart"></canvas>
       </div>
       
+      <!-- Optional router outlet -->
       <router-outlet></router-outlet>
     </div>
   </div>

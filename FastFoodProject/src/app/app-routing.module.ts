@@ -10,6 +10,12 @@ import { AdmindashboardComponent } from './Components/admindashboard/admindashbo
 import { ManageitemsComponent } from './Components/manageitems/manageitems.component';
 import { PizzaComponent } from './Components/pizza/pizza.component';
 import { FooditemformComponent } from './Components/fooditemform/fooditemform.component';
+import { UserProfileComponent } from './Components/user-profile/user-profile.component';
+import { AdminOrderConfirmComponent } from './Components/admin-order-confirm/admin-order-confirm.component';
+import { OrderConfirmationComponent } from './Components/order-confirmation/order-confirmation.component';
+import { OrderlistComponent } from './Components/orderlist/orderlist.component';
+import { ManageUsersComponent } from './Components/manage-users/manage-users.component';
+import { CartComponent } from './Components/cart/cart.component';
 
 const routes: Routes = [ 
   {path:"",component:HomeComponent},
@@ -23,7 +29,13 @@ const routes: Routes = [
 {path:"manageitems",component:ManageitemsComponent},
 { path: 'add-food-item', component: FooditemformComponent },
 { path: 'update-food-item/:id', component: FooditemformComponent },
-{path:'pizza',component:PizzaComponent}
+{path:'pizza',component:PizzaComponent},
+{path:'user-profile',component:UserProfileComponent},
+{path:'manageorders',component:AdminOrderConfirmComponent},
+{path:'order-confirmation/:id',component:OrderConfirmationComponent},
+{path:'order-list',component:OrderlistComponent},
+{path:'manageusers',component:ManageUsersComponent},
+{path:'cart',component:CartComponent}
 
 ];
 

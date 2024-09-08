@@ -339,3 +339,4 @@ C:\Users\Nirmal Raj\Desktop\Project\FastFoodangdotnetProject\FastFoodApi\FastFoo
 C:\Users\Nirmal Raj\Desktop\Project\FastFoodangdotnetProject\FastFoodApi\FastFoodApi\obj\Debug\net8.0\ref\FastFoodApi.dll
 C:\Users\nirmalraj.s\Desktop\FastFoodProject\FastFoodApi\FastFoodApi\obj\Debug\net8.0\FastFoodApi.sourcelink.json
 C:\Users\nirmalraj.s\Desktop\FastFoodProject\FastFoodApi\FastFoodApi\bin\Debug\net8.0\FastFoodApi.staticwebassets.runtime.json
+C:\Users\Nirmal Raj\Desktop\Project\FastFoodangdotnetProject\FastFoodApi\FastFoodApi\bin\Debug\net8.0\FastFoodApi.staticwebassets.runtime.json

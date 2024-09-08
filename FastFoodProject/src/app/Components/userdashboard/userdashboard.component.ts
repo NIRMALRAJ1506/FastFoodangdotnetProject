@@ -13,6 +13,7 @@ export class UserdashboardComponent implements OnInit {
   foodTypes: string[] = [];
   selectedFoodType: string | null = null;
   showMenu: boolean = false;
+  selectedItem: any;
 
   constructor(private router: Router) {}
 
@@ -50,17 +51,70 @@ export class UserdashboardComponent implements OnInit {
   }
 
   orderNow(item: any) {
-    console.log('Ordering item:', item);
-    // Implement order logic here
+    this.selectedItem = item;
+    this.createOrder(item);
+  }
+
+  async createOrder(item: any) {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      console.error('User not logged in');
+      return;
+    }
+
+    try {
+      const orderCreateModel = {
+        orderNumber: `ORD-${new Date().getTime()}`, // Generate a unique order number
+        totalPrice: item.price,
+        orderTime: new Date().toISOString(),
+        status: 'Pending',
+        userId: userId,
+        foodItemIds: [item.id] // Only pass the FoodItem ID
+      };
+
+      const response = await axios.post('http://localhost:5270/api/order', orderCreateModel, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      console.log('Order created successfully', response.data); // Log response
+      this.router.navigate(['/order-confirmation', response.data.id]);
+    } catch (error) {
+      console.error('Error creating order', error);
+      alert('Failed to create order. Please try again.');
+    }
   }
 
   addToCart(item: any) {
-    console.log('Adding item to cart:', item);
-    // Implement add to cart logic here
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const existingItem = cart.find((cartItem: any) => cartItem.id === item.id);
+
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      cart.push({ ...item, quantity: 1 });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert('Item added to cart');
+  }
+
+  showProfile() {
+    this.router.navigate(['/user-profile']);
+  }
+
+  goToOrders() {
+    this.router.navigate(['/order-list']);
+  }
+
+  goToCart() {
+    this.router.navigate(['/cart']);
   }
 
   logout() {
-    // Perform logout logic here
+    localStorage.removeItem('userId'); // Clear userId from localStorage on logout
+    localStorage.removeItem('cart'); // Clear cart from localStorage on logout
     this.router.navigate(['/home']);
   }
 }

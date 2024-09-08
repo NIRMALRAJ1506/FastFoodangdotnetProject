@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FastFoodApi.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using FastFoodApi.Models;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FastFoodApi.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     public class FoodItemsController : ControllerBase
     {
         private readonly FoodContext _context;
@@ -18,42 +19,71 @@ namespace FastFoodApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<FoodItem>>> GetFoodItems()
+        public async Task<IActionResult> GetFoodItems()
         {
-            return await _context.FoodItems.ToListAsync();
+            var foodItems = await _context.FoodItems.ToListAsync();
+            return Ok(foodItems);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<FoodItem>> GetFoodItem(int id)
+        public async Task<IActionResult> GetFoodItemById(int id)
         {
             var foodItem = await _context.FoodItems.FindAsync(id);
-
             if (foodItem == null)
             {
                 return NotFound();
             }
-
-            return foodItem;
+            return Ok(foodItem);
         }
 
         [HttpPost]
-        public async Task<ActionResult<FoodItem>> PostFoodItem(FoodItem foodItem)
+        public async Task<IActionResult> CreateFoodItem([FromBody] FoodItem foodItem)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             _context.FoodItems.Add(foodItem);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetFoodItem), new { id = foodItem.Id }, foodItem);
+
+            return CreatedAtAction(nameof(GetFoodItemById), new { id = foodItem.Id }, foodItem);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutFoodItem(int id, FoodItem foodItem)
+        public async Task<IActionResult> UpdateFoodItem(int id, [FromBody] FoodItem updatedFoodItem)
         {
-            if (id != foodItem.Id)
+            if (id != updatedFoodItem.Id)
             {
-                return BadRequest();
+                return BadRequest("FoodItem ID mismatch.");
             }
 
-            _context.Entry(foodItem).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            var foodItem = await _context.FoodItems.FindAsync(id);
+            if (foodItem == null)
+            {
+                return NotFound("FoodItem not found.");
+            }
+
+            foodItem.Name = updatedFoodItem.Name;
+            foodItem.Description = updatedFoodItem.Description;
+            foodItem.Price = updatedFoodItem.Price;
+            foodItem.ImgUrl = updatedFoodItem.ImgUrl;
+            foodItem.FoodType = updatedFoodItem.FoodType;
+
+            try
+            {
+                _context.Entry(foodItem).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.FoodItems.Any(e => e.Id == id))
+                {
+                    return NotFound("FoodItem not found.");
+                }
+                throw;
+            }
+
             return NoContent();
         }
 
@@ -63,11 +93,12 @@ namespace FastFoodApi.Controllers
             var foodItem = await _context.FoodItems.FindAsync(id);
             if (foodItem == null)
             {
-                return NotFound();
+                return NotFound("FoodItem not found.");
             }
 
             _context.FoodItems.Remove(foodItem);
             await _context.SaveChangesAsync();
+
             return NoContent();
         }
     }

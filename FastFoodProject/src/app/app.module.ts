@@ -28,6 +28,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgChartsModule } from 'ng2-charts';
+import { UserProfileComponent } from './Components/user-profile/user-profile.component';
+import { OrderConfirmationComponent } from './Components/order-confirmation/order-confirmation.component';
+import { AdminOrderConfirmComponent } from './Components/admin-order-confirm/admin-order-confirm.component';
+import { OrderlistComponent } from './Components/orderlist/orderlist.component';
+import { ManageUsersComponent } from './Components/manage-users/manage-users.component';
+import { CartComponent } from './Components/cart/cart.component';
 
 
 @NgModule({
@@ -45,7 +51,13 @@ import { NgChartsModule } from 'ng2-charts';
     AdmindashboardComponent,
     ManageitemsComponent,
     FooditemformComponent,
-    AddFoodItemComponent
+    AddFoodItemComponent,
+    UserProfileComponent,
+    OrderConfirmationComponent,
+    AdminOrderConfirmComponent,
+    OrderlistComponent,
+    ManageUsersComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

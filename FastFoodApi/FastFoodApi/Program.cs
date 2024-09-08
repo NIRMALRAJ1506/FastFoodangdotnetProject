@@ -7,6 +7,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<FoodContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        // Configure to ignore circular references
+        options.JsonSerializerOptions.MaxDepth = 10000; // Adjust if needed
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+    });
+
+
+
+
 // Add CORS policy
 builder.Services.AddCors(options =>
 {

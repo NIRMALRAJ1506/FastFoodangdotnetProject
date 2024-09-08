@@ -1,4 +1,3 @@
-// signup.component.ts
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../shared/services/user.service'; // Adjust the path according to your project structure
@@ -16,34 +15,29 @@ export class SignupComponent {
     this.signupForm = this.fb.group({
       name: ['', Validators.required],
       dob: ['', Validators.required],
-      contactNo: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]], // Validate contact number
+      contactNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]], // Validate contact number
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      role: ['', Validators.required] // Add role control
+      role: ['', Validators.required] // Ensure role is required
     });
   }
 
   onSubmit() {
     if (this.signupForm.valid) {
       const formData = this.signupForm.value;
-      if (formData.role === 'Admin') {
-        this.userService.registerAdmin(formData)
-          .then(response => {
-            console.log('Admin registration successful', response);
-          })
-          .catch(error => {
-            console.error('Error during admin registration', error);
-          });
-      } else {
-        this.userService.registerUser(formData)
-          .then(response => {
-            console.log('User registration successful', response);
-          })
-          .catch(error => {
-            console.error('Error during user registration', error);
-          });
-      }
+      const registrationObservable = formData.role === 'Admin' 
+        ? this.userService.registerAdmin(formData) 
+        : this.userService.registerUser(formData);
+
+      registrationObservable
+        .then(response => {
+          console.log(`${formData.role} registration successful`, response);
+          this.signupForm.reset(); // Reset form after successful submission
+        })
+        .catch(error => {
+          console.error(`Error during ${formData.role} registration`, error);
+        });
     } else {
       console.error('Form is invalid');
     }

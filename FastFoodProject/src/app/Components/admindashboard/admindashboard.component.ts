@@ -12,10 +12,13 @@ export class AdmindashboardComponent implements OnInit {
   showMenu = false;
   totalItems: number = 0;
   totalUsers: number = 0;
+  totalOrders: number = 0;
   chart: any;
 
   fastFoodItems = [
     { name: 'Manage Items', link: '/manageitems' },
+    { name: 'Manage Orders', link: '/manageorders' },
+    {name: 'Manage Users',link:'/manageusers'}
   ];
 
   constructor(private router: Router) {}
@@ -23,35 +26,44 @@ export class AdmindashboardComponent implements OnInit {
   ngOnInit() {
     this.fetchItemCount();
     this.fetchUserCount();
+    this.fetchOrderCount();
   }
 
   toggleMenu() {
     this.showMenu = !this.showMenu;
   }
 
-  // Fetch number of items from API
   async fetchItemCount() {
     try {
       const response = await axios.get('http://localhost:5270/api/FoodItems');
       this.totalItems = response.data.length;
+      this.updateChart();
     } catch (error) {
       console.error('Error fetching item count:', error);
     }
   }
 
-  // Fetch number of users from API and update the chart
   async fetchUserCount() {
     try {
-      const response = await axios.get('http://localhost:5270/api/User/total');
-      this.totalUsers = response.data;
-      this.createUserChart();
+      const response = await axios.get('http://localhost:5270/api/user/count');
+      this.totalUsers = response.data; // Ensure this returns a number
+      this.updateChart();
     } catch (error) {
       console.error('Error fetching user count:', error);
     }
   }
 
-  createUserChart() {
-    // Check if the code is running in a browser environment
+  async fetchOrderCount() {
+    try {
+      const response = await axios.get('http://localhost:5270/api/order/count'); // Ensure this endpoint is correct
+      this.totalOrders = response.data; // Ensure this returns a number
+      this.updateChart();
+    } catch (error) {
+      console.error('Error fetching order count:', error);
+    }
+  }
+
+  updateChart() {
     if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       const canvas = document.getElementById('userChart') as HTMLCanvasElement;
       if (canvas) {
@@ -62,12 +74,12 @@ export class AdmindashboardComponent implements OnInit {
         this.chart = new Chart(ctx!, {
           type: 'bar',
           data: {
-            labels: ['Total Users'],
+            labels: ['Total Items', 'Total Users', 'Total Orders'],
             datasets: [
               {
-                label: 'Users',
-                data: [this.totalUsers],
-                backgroundColor: ['#42A5F5'],
+                label: 'Count',
+                data: [this.totalItems, this.totalUsers, this.totalOrders],
+                backgroundColor: ['#42A5F5', '#66BB6A', '#FFA726'],
               }
             ]
           },
@@ -85,6 +97,7 @@ export class AdmindashboardComponent implements OnInit {
   }
 
   logout() {
+    // Perform logout logic here
     this.router.navigate(['/home']);
   }
 }
