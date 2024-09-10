@@ -11,6 +11,7 @@ export class UserProfileComponent implements OnInit {
   userId: number;
   userDetails: any = {}; // Initialize as an empty object
   isEditing: boolean = false;
+  token:any;
 
   constructor(private router: Router) {
     // Retrieve the userId from localStorage
@@ -19,11 +20,16 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchUserDetails();
+    this.token=localStorage.getItem('jwtToken');
   }
 
   async fetchUserDetails() {
     try {
-      const response = await axios.get(`http://localhost:5270/api/user/${this.userId}`);
+      const response = await axios.get(`http://localhost:5270/api/user/${this.userId}`,{
+        headers:{
+          'Authorization':`Bearer ${this.token}`
+        }
+      });
       this.userDetails = response.data;
     } catch (error) {
       console.error('Error fetching user details', error);
@@ -36,7 +42,11 @@ export class UserProfileComponent implements OnInit {
 
   async updateProfile() {
     try {
-      await axios.put(`http://localhost:5270/api/user/${this.userId}`, this.userDetails);
+      await axios.put(`http://localhost:5270/api/user/${this.userId}`, this.userDetails,{
+        headers:{
+          'Authorization':`Bearer ${this.token}`
+        }
+      });
       this.isEditing = false;
       // Optionally, refresh the user details
       await this.fetchUserDetails();
@@ -47,7 +57,11 @@ export class UserProfileComponent implements OnInit {
 
   async deleteProfile() {
     try {
-      await axios.delete(`http://localhost:5270/api/user/${this.userId}`);
+      await axios.delete(`http://localhost:5270/api/user/${this.userId}`,{
+        headers:{
+          'Authorization':`Bearer ${this.token}`
+        }
+      });
       // Navigate back to the dashboard or another page
       this.router.navigate(['/home']);
     } catch (error) {

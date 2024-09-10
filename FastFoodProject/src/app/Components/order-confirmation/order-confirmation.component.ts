@@ -26,7 +26,7 @@ export class OrderConfirmationComponent implements OnInit {
     try {
       const response = await axios.get(`http://localhost:5270/api/order/${orderId}`,{
         headers:{
-          'Authorization': `Bearer ${this.token}`
+          'Authorization':`Bearer ${this.token}`
         }
       });
       console.log('API Response:', response); // Log full response object

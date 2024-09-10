@@ -14,6 +14,7 @@ export class ManageitemsComponent implements OnInit {
   selectedFoodType: string | null = null;
   showAddItemForm: boolean = false;
   editingItem: any = null; // For editing existing items
+  token:any;
 
   // Model for new or editing item
   newItem: any = {
@@ -28,11 +29,16 @@ export class ManageitemsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadFoodItems();
+    this.token=localStorage.getItem('jwtToken');
   }
 
   async loadFoodItems() {
     try {
-      const response = await axios.get('http://localhost:5270/api/fooditems');
+      const response = await axios.get('http://localhost:5270/api/fooditems',{
+        headers:{
+          'Authorization':`Bearer ${this.token}`
+        }
+      });
       this.foodItems = response.data;
       console.log(this.foodItems)
       this.filteredItems = this.foodItems;
@@ -68,7 +74,11 @@ export class ManageitemsComponent implements OnInit {
   async addOrUpdateItem() {
     try {
       if (this.editingItem) {
-        await axios.put(`http://localhost:5270/api/fooditems/${this.editingItem.id}`, this.newItem);
+        await axios.put(`http://localhost:5270/api/fooditems/${this.editingItem.id}`, this.newItem,{
+          headers:{
+            'Authorization':`Bearer ${this.token}`
+          }
+        });
         console.log('Item updated successfully');
       } else {
         console.log(this.newItem)
@@ -79,6 +89,10 @@ export class ManageitemsComponent implements OnInit {
           "price": this.newItem.price,
           "imgUrl": this.newItem.imageUrl,
           "foodType": this.newItem.foodType
+        },{
+          headers:{
+            'Authorization':`Bearer ${this.token}`
+          }
         });
         console.log('Item added successfully:', response);
         this.foodItems.push(response.data); // Add new item to the list
@@ -96,7 +110,11 @@ export class ManageitemsComponent implements OnInit {
   // Delete Item
   async deleteItem(id: number) {
     try {
-      await axios.delete(`http://localhost:5270/api/fooditems/${id}`);
+      await axios.delete(`http://localhost:5270/api/fooditems/${id}`,{
+        headers:{
+          'Authorization':`Bearer ${this.token}`
+        }
+      });
       console.log('Item deleted successfully');
       this.loadFoodItems(); // Reload food items after deletion
     } catch (error) {

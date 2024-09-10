@@ -10,16 +10,22 @@ export class AdminOrderConfirmComponent implements OnInit {
   orders: any[] = [];
   loading = true;
   error: string | null = null;
+  token:any;
 
   ngOnInit(): void {
     this.loadOrders();
+    this.token=localStorage.getItem('jwtToken');
   }
 
   async loadOrders() {
     this.loading = true;
     this.error = null;
     try {
-      const response = await axios.get('http://localhost:5270/api/order'); // Ensure this API endpoint is correct
+      const response = await axios.get('http://localhost:5270/api/order',{
+        headers:{
+          'Authorization':`Bearer ${this.token}`
+        }
+      }); // Ensure this API endpoint is correct
       
       console.log('API Response:', response.data); // Log API response for debugging
 

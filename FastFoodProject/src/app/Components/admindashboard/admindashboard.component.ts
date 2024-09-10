@@ -14,6 +14,7 @@ export class AdmindashboardComponent implements OnInit {
   totalUsers: number = 0;
   totalOrders: number = 0;
   chart: any;
+  token:any;
 
   fastFoodItems = [
     { name: 'Manage Items', link: '/manageitems' },
@@ -28,6 +29,7 @@ export class AdmindashboardComponent implements OnInit {
     this.fetchItemCount();
     this.fetchUserCount();
     this.fetchOrderCount();
+    this.token=localStorage.getItem('jwtToken')
   }
 
   toggleMenu() {
@@ -36,7 +38,11 @@ export class AdmindashboardComponent implements OnInit {
 
   async fetchItemCount() {
     try {
-      const response = await axios.get('http://localhost:5270/api/FoodItems');
+      const response = await axios.get('http://localhost:5270/api/FoodItems',{
+        headers:{
+          'Authorization':`Bearer ${this.token}`
+        }
+      });
       this.totalItems = response.data.length;
       this.updateChart();
     } catch (error) {
@@ -46,7 +52,11 @@ export class AdmindashboardComponent implements OnInit {
 
   async fetchUserCount() {
     try {
-      const response = await axios.get('http://localhost:5270/api/user/count');
+      const response = await axios.get('http://localhost:5270/api/user/count',{
+        headers:{
+          'Authorization':`Bearer ${this.token}`
+        }
+      });
       this.totalUsers = response.data; // Ensure this returns a number
       this.updateChart();
     } catch (error) {
@@ -56,7 +66,11 @@ export class AdmindashboardComponent implements OnInit {
 
   async fetchOrderCount() {
     try {
-      const response = await axios.get('http://localhost:5270/api/order/count'); // Ensure this endpoint is correct
+      const response = await axios.get('http://localhost:5270/api/order/count',{
+        headers:{
+          'Authorization':`Bearer ${this.token}`
+        }
+      }); // Ensure this endpoint is correct
       this.totalOrders = response.data; // Ensure this returns a number
       this.updateChart();
     } catch (error) {

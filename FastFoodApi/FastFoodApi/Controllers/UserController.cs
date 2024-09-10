@@ -153,5 +153,12 @@ namespace FastFoodApi.Controllers
         {
             return _context.Users.Any(e => e.Id == id);
         }
+
+        [HttpGet("count")]
+        public async Task<IActionResult> GetUserCount()
+        {
+            var count = await _context.Users.CountAsync();
+            return Ok(count);
+        }
     }
 }
