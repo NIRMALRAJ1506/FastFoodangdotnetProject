@@ -34,6 +34,8 @@ import { AdminOrderConfirmComponent } from './Components/admin-order-confirm/adm
 import { OrderlistComponent } from './Components/orderlist/orderlist.component';
 import { ManageUsersComponent } from './Components/manage-users/manage-users.component';
 import { CartComponent } from './Components/cart/cart.component';
+import { FeedbacksComponent } from './Components/feedbacks/feedbacks.component';
+import { CaroselComponent } from './Components/carosel/carosel.component';
 
 
 @NgModule({
@@ -57,7 +59,9 @@ import { CartComponent } from './Components/cart/cart.component';
     AdminOrderConfirmComponent,
     OrderlistComponent,
     ManageUsersComponent,
-    CartComponent
+    CartComponent,
+    FeedbacksComponent,
+    CaroselComponent
   ],
   imports: [
     BrowserModule,

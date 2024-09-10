@@ -9,7 +9,7 @@ import { UserService } from '../../shared/services/user.service'; // Adjust the 
 })
 export class SignupComponent {
   signupForm: FormGroup;
-  roles = ['User', 'Admin']; // Dropdown options
+  roles = ['User', 'Admin']; // Dropdown options (this is for display only now)
 
   constructor(private fb: FormBuilder, private userService: UserService) {
     this.signupForm = this.fb.group({
@@ -19,24 +19,21 @@ export class SignupComponent {
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      role: ['', Validators.required] // Ensure role is required
+      role: ['User', Validators.required] // Default role is 'User'
     });
   }
 
   onSubmit() {
     if (this.signupForm.valid) {
-      const formData = this.signupForm.value;
-      const registrationObservable = formData.role === 'Admin' 
-        ? this.userService.registerAdmin(formData) 
-        : this.userService.registerUser(formData);
-
-      registrationObservable
+      const formData = { ...this.signupForm.value, role: 'User' }; // Force role to 'User'
+      
+      this.userService.registerUser(formData)
         .then(response => {
-          console.log(`${formData.role} registration successful`, response);
+          console.log('User registration successful', response);
           this.signupForm.reset(); // Reset form after successful submission
         })
         .catch(error => {
-          console.error(`Error during ${formData.role} registration`, error);
+          console.error('Error during user registration', error);
         });
     } else {
       console.error('Form is invalid');

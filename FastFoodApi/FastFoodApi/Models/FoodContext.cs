@@ -13,6 +13,7 @@ namespace FastFoodApi.Models
         public DbSet<FoodItem> FoodItems { get; set; }
         public DbSet<OrderModel> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Feedback> Feedback { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

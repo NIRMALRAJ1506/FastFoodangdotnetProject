@@ -18,7 +18,8 @@ export class AdmindashboardComponent implements OnInit {
   fastFoodItems = [
     { name: 'Manage Items', link: '/manageitems' },
     { name: 'Manage Orders', link: '/manageorders' },
-    {name: 'Manage Users',link:'/manageusers'}
+    {name: 'Manage Users',link:'/manageusers'},
+    {name:'Feedbacks',link:'/feedbacks'}
   ];
 
   constructor(private router: Router) {}

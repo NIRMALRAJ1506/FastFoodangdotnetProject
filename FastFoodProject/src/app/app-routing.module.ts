@@ -16,6 +16,7 @@ import { OrderConfirmationComponent } from './Components/order-confirmation/orde
 import { OrderlistComponent } from './Components/orderlist/orderlist.component';
 import { ManageUsersComponent } from './Components/manage-users/manage-users.component';
 import { CartComponent } from './Components/cart/cart.component';
+import { FeedbacksComponent } from './Components/feedbacks/feedbacks.component';
 
 const routes: Routes = [ 
   {path:"",component:HomeComponent},
@@ -35,7 +36,8 @@ const routes: Routes = [
 {path:'order-confirmation/:id',component:OrderConfirmationComponent},
 {path:'order-list',component:OrderlistComponent},
 {path:'manageusers',component:ManageUsersComponent},
-{path:'cart',component:CartComponent}
+{path:'cart',component:CartComponent},
+{path:'feedbacks',component:FeedbacksComponent}
 
 ];
 

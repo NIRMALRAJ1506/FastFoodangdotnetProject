@@ -123,7 +123,7 @@ namespace FastFoodApi.Controllers
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
             var user = await _context.Users
-                .SingleOrDefaultAsync(u => u.Username == model.Username && u.Password == model.Password);
+                .SingleOrDefaultAsync(u => u.Username == model.Username && u.Password == model.Password && u.Role=="User");
 
             if (user == null)
             {

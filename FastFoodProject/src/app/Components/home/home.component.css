@@ -1,15 +1,20 @@
-
-body {
-    font-family: Arial, sans-serif;
+/* src/app/app.component.css */
+html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
-    color: #333;
+    font-family: Arial, sans-serif;
+    color:white; /* Dark color for text */
+    background: url('/assets/images/background.jpg') no-repeat center center fixed;
+    background-size: cover; /* Ensure the background image covers the entire viewport */
+    padding-top: 20px;
 }
 
 #hero {
     text-align: center;
     padding: 50px;
-    background: #f8f9fa;
+    /* Removed background color */
+    
 }
 
 #hero h1 {
@@ -38,7 +43,8 @@ body {
 
 #featured {
     padding: 50px;
-    background: #fff;
+   
+    /* Removed background color */
 }
 
 #featured h2 {
@@ -74,7 +80,8 @@ body {
 
 #special-offers {
     padding: 50px;
-    background: #f8f9fa;
+   
+    /* Removed background color */
 }
 
 #special-offers h2 {
@@ -99,7 +106,8 @@ body {
 
 #customer-reviews {
     padding: 50px;
-    background: #fff;
+    
+    /* Removed background color */
 }
 
 #customer-reviews h2 {
@@ -121,6 +129,7 @@ body {
 .review p {
     margin: 0;
 }
+
 .product-card {
     text-align: center;
 }
@@ -138,18 +147,71 @@ body {
     white-space: nowrap;
     box-sizing: border-box;
 }
+
 .marquee-content {
     display: inline-flex;
     animation: marquee 20s linear infinite;
 }
+
 .marquee-content img {
     border-radius: 8px;
 }
+
 @keyframes marquee {
     0% {
         transform: translate(0, 0);
     }
     100% {
         transform: translate(-50%, 0); /* Move by half because we duplicated the images */
+    }
+}
+
+/* Contact Us Section Styling */
+#contact-us {
+    padding: 50px;
+   
+    /* Removed background color */
+}
+
+.contact-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.contact-info {
+    flex: 1;
+    min-width: 300px;
+    margin-right: 20px;
+}
+
+.contact-info h2 {
+    margin-bottom: 20px;
+}
+
+.contact-info p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.contact-map {
+    flex: 1;
+    min-width: 300px;
+    height: 300px;
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .contact-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contact-info, .contact-map {
+        margin-right: 0;
+        margin-top: 20px;
+        width: 100%;
     }
 }

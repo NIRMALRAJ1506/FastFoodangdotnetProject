@@ -1,16 +1,12 @@
-/* General styles */
-body {
-  font-family: Arial, sans-serif;
-}
+/* src/app/userdashboard/userdashboard.component.css */
 
-/* Container for the whole dashboard */
+/* Ensures that the specific styling for the UserdashboardComponent is applied correctly */
 .dashboard-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
 
-/* Header styles */
 .header {
   display: flex;
   justify-content: space-between;
@@ -36,7 +32,6 @@ body {
   background-color: #0056b3;
 }
 
-/* Main content styles */
 .main-content {
   display: flex;
   flex: 1;
@@ -152,18 +147,17 @@ body {
   background-color: #218838;
 }
 
-.nav-button a{
+.nav-button a {
   text-decoration: none;
   color: #007bff;
   display: block;
 }
 
-.nav-button:hover{
+.nav-button:hover {
   background-color: #e9ecef;
 }
 
-/* userdashboard.component.css */
-
+/* Additional specific styles */
 .show-profile-button {
   background-color: #007bff; /* Blue color for the button */
   border: none;

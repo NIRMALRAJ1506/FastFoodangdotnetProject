@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div class="mar">
 <div class="contact-us-container">
-    <h1>Contact Us</h1>
+    <h1>Feedback</h1>
     <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="name">Name</label>
@@ -12,8 +12,8 @@
         <input id="email" formControlName="email" type="email" class="form-control" />
       </div>
       <div class="form-group">
-        <label for="feedback">Feedback</label>
-        <textarea id="feedback" formControlName="feedback" class="form-control" rows="4"></textarea>
+        <label for="feedbacktext">Feedback</label>
+        <textarea id="feedbacktext" formControlName="feedbacktext" class="form-control" rows="4"></textarea>
       </div>
       <button type="submit" class="btn btn-primary">Send</button>
     </form>
