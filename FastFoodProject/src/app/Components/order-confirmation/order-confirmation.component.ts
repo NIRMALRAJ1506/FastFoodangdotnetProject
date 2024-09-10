@@ -8,6 +8,7 @@ import axios from 'axios';
 })
 export class OrderConfirmationComponent implements OnInit {
   orderDetails: any;
+  token:any;
 
   constructor(private route: ActivatedRoute, private router: Router) {}
 
@@ -18,11 +19,16 @@ export class OrderConfirmationComponent implements OnInit {
     } else {
       console.error('No order ID found in the route parameters');
     }
+    this.token=localStorage.getItem('jwtToken');
   }
 
   async fetchOrderDetails(orderId: string) {
     try {
-      const response = await axios.get(`http://localhost:5270/api/order/${orderId}`);
+      const response = await axios.get(`http://localhost:5270/api/order/${orderId}`,{
+        headers:{
+          'Authorization': `Bearer ${this.token}`
+        }
+      });
       console.log('API Response:', response); // Log full response object
       console.log('API Response Data:', response.data); // Log raw data
   

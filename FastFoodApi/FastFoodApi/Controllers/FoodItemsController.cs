@@ -1,4 +1,5 @@
 ﻿using FastFoodApi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -7,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace FastFoodApi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
+    
     public class FoodItemsController : ControllerBase
     {
         private readonly FoodContext _context;

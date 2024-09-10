@@ -8,11 +8,13 @@ import axios from 'axios';
 })
 export class OrderlistComponent implements OnInit {
   userOrders: any[] = [];
+  token:any;
 
   constructor() {}
 
   ngOnInit(): void {
     this.fetchUserOrders();
+    this.token=localStorage.getItem('jwtToken');
   }
 
   async fetchUserOrders() {
@@ -23,7 +25,11 @@ export class OrderlistComponent implements OnInit {
     }
 
     try {
-      const response = await axios.get(`http://localhost:5270/api/order/user/${userId}`);
+      const response = await axios.get(`http://localhost:5270/api/order/user/${userId}`,{
+      headers:{
+        'Authorization': `Bearer ${this.token}`
+      }
+      });
       this.userOrders = response.data;
       console.log('User orders fetched successfully:', this.userOrders);
     } catch (error) {

@@ -10,10 +10,12 @@ namespace FastFoodApi.Controllers
     public class AdminController : ControllerBase
     {
         private readonly FoodContext _context;
+        private readonly JwtTokenService _jwtTokenService;
 
-        public AdminController(FoodContext context)
+        public AdminController(FoodContext context, JwtTokenService jwtTokenService)
         {
             _context = context;
+            _jwtTokenService = jwtTokenService;
         }
 
         [HttpPost("register")]
@@ -38,7 +40,10 @@ namespace FastFoodApi.Controllers
             _context.Users.Add(admin);
             await _context.SaveChangesAsync();
 
-            return Ok("Admin registered successfully.");
+            // Generate JWT token
+            var token = _jwtTokenService.GenerateToken(admin);
+
+            return Ok(new { message = "Admin registered successfully.", token });
         }
 
         [HttpPost("login")]
@@ -52,7 +57,10 @@ namespace FastFoodApi.Controllers
                 return Unauthorized("Invalid username or password.");
             }
 
-            return Ok(new { message = "Admin login successful" });
+            // Generate JWT token
+            var token = _jwtTokenService.GenerateToken(admin);
+
+            return Ok(new { message = "Admin login successful", token });
         }
     }
 }

@@ -12,10 +12,12 @@ namespace FastFoodApi.Controllers
     public class UserController : ControllerBase
     {
         private readonly FoodContext _context;
+        private readonly JwtTokenService _jwtTokenService;
 
-        public UserController(FoodContext context)
+        public UserController(FoodContext context, JwtTokenService jwtTokenService)
         {
             _context = context;
+            _jwtTokenService = jwtTokenService;
         }
 
         // Get all users except admins
@@ -107,15 +109,10 @@ namespace FastFoodApi.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetUserById), new { id = user.Id }, user);
-        }
+            // Generate JWT token for the new user
+            var token = _jwtTokenService.GenerateToken(user);
 
-        // Get user count
-        [HttpGet("count")]
-        public async Task<IActionResult> GetUserCount()
-        {
-            var count = await _context.Users.CountAsync();
-            return Ok(count);
+            return CreatedAtAction(nameof(GetUserById), new { id = user.Id }, new { user, token });
         }
 
         // User login
@@ -123,14 +120,17 @@ namespace FastFoodApi.Controllers
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
             var user = await _context.Users
-                .SingleOrDefaultAsync(u => u.Username == model.Username && u.Password == model.Password && u.Role=="User");
+                .SingleOrDefaultAsync(u => u.Username == model.Username && u.Password == model.Password && u.Role == "User");
 
             if (user == null)
             {
                 return Unauthorized("Invalid username or password.");
             }
 
-            return Ok(new { userId = user.Id });
+            // Generate JWT token
+            var token = _jwtTokenService.GenerateToken(user);
+
+            return Ok(new { userId = user.Id, token });
         }
 
         // Delete user by ID

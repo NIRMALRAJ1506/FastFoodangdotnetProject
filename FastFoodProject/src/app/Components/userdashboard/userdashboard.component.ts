@@ -14,21 +14,36 @@ export class UserdashboardComponent implements OnInit {
   selectedFoodType: string | null = null;
   showMenu: boolean = false;
   selectedItem: any;
+  token: string | null = null;
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
+    this.token = localStorage.getItem('jwtToken');
     this.loadFoodItems();
   }
 
   async loadFoodItems() {
+    if (!this.token) {
+      console.error('No JWT token found');
+      return;
+    }
+
     try {
-      const response = await axios.get('http://localhost:5270/api/fooditems');
+      const response = await axios.get('http://localhost:5270/api/fooditems', {
+        headers: {
+          'Authorization': `Bearer ${this.token}`
+        }
+      });
       this.foodItems = response.data;
       this.filteredItems = this.foodItems;
       this.extractFoodTypes();
     } catch (error) {
-      console.error('Error loading food items', error);
+      if (axios.isAxiosError(error)) {
+        console.error('Error loading food items', error.response?.data || error.message);
+      } else {
+        console.error('Unexpected error', error);
+      }
     }
   }
 
@@ -74,14 +89,19 @@ export class UserdashboardComponent implements OnInit {
 
       const response = await axios.post('http://localhost:5270/api/order', orderCreateModel, {
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.token}`
         }
       });
 
       console.log('Order created successfully', response.data); // Log response
       this.router.navigate(['/order-confirmation', response.data.id]);
     } catch (error) {
-      console.error('Error creating order', error);
+      if (axios.isAxiosError(error)) {
+        console.error('Error creating order', error.response?.data || error.message);
+      } else {
+        console.error('Unexpected error', error);
+      }
       alert('Failed to create order. Please try again.');
     }
   }
@@ -115,6 +135,7 @@ export class UserdashboardComponent implements OnInit {
   logout() {
     localStorage.removeItem('userId'); // Clear userId from localStorage on logout
     localStorage.removeItem('cart'); // Clear cart from localStorage on logout
-    this.router.navigate(['/home']);
+    localStorage.removeItem('jwtToken');  // Remove the token from localStorage
+    this.router.navigate(['/login']);
   }
 }

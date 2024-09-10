@@ -511,3 +511,4 @@ C:\Users\nirmalraj.s\Desktop\FoodProject\FastFoodangdotnetProject\FastFoodApi\Fa
 C:\Users\nirmalraj.s\Desktop\FoodProject\FastFoodangdotnetProject\FastFoodApi\FastFoodApi\obj\Debug\net8.0\FastFoodApi.pdb
 C:\Users\nirmalraj.s\Desktop\FoodProject\FastFoodangdotnetProject\FastFoodApi\FastFoodApi\obj\Debug\net8.0\FastFoodApi.genruntimeconfig.cache
 C:\Users\nirmalraj.s\Desktop\FoodProject\FastFoodangdotnetProject\FastFoodApi\FastFoodApi\obj\Debug\net8.0\ref\FastFoodApi.dll
+C:\Users\nirmalraj.s\Desktop\FoodProject\FastFoodangdotnetProject\FastFoodApi\FastFoodApi\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

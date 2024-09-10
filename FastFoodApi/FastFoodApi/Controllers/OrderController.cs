@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FastFoodApi.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FastFoodApi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
+    
     public class OrderController : ControllerBase
     {
         private readonly FoodContext _context;

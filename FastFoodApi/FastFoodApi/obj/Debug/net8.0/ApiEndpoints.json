@@ -409,16 +409,6 @@
   },
   {
     "ContainingType": "FastFoodApi.Controllers.UserController",
-    "Method": "GetUserCount",
-    "RelativePath": "api/User/count",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "FastFoodApi.Controllers.UserController",
     "Method": "Login",
     "RelativePath": "api/User/login",
     "HttpMethod": "POST",

@@ -99,6 +99,7 @@ export class AdmindashboardComponent implements OnInit {
 
   logout() {
     // Perform logout logic here
-    this.router.navigate(['/home']);
+    localStorage.removeItem('jwtToken');  // Remove the token from localStorage
+  this.router.navigate(['/login']);  
   }
 }

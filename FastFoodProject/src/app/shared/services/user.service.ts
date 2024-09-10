@@ -1,5 +1,6 @@
 import axios, { AxiosError } from 'axios';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,18 @@ import { Injectable } from '@angular/core';
 export class UserService {
   private apiUrl = 'http://localhost:5270/api'; // Adjust the base URL as needed
 
-  constructor() {}
+  constructor(private router: Router) {
+    // Set up interceptors to include JWT token in requests
+    axios.interceptors.request.use((config) => {
+      const token = localStorage.getItem('jwtToken');
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+      return config;
+    }, (error) => {
+      return Promise.reject(error);
+    });
+  }
 
   // Helper function to check if error is an AxiosError
   private isAxiosError(error: any): error is AxiosError {
@@ -17,7 +29,13 @@ export class UserService {
   // Registration Methods
   registerUser(userData: any) {
     return axios.post(`${this.apiUrl}/user/register`, userData)
-      .then(response => response.data)
+      .then(response => {
+        const { token, userId } = response.data;
+        // Store JWT token and userId in localStorage
+        localStorage.setItem('jwtToken', token);
+        localStorage.setItem('userId', userId);
+        return response.data;
+      })
       .catch((error: any) => {
         if (this.isAxiosError(error)) {
           console.error('Error during user registration', error.response?.data || error.message);
@@ -30,7 +48,13 @@ export class UserService {
 
   registerAdmin(adminData: any) {
     return axios.post(`${this.apiUrl}/admin/register`, adminData)
-      .then(response => response.data)
+      .then(response => {
+        const { token, userId } = response.data;
+        // Store JWT token and userId in localStorage
+        localStorage.setItem('jwtToken', token);
+        localStorage.setItem('userId', userId);
+        return response.data;
+      })
       .catch((error: any) => {
         if (this.isAxiosError(error)) {
           console.error('Error during admin registration', error.response?.data || error.message);
@@ -45,9 +69,11 @@ export class UserService {
   loginUser(credentials: { username: string; password: string }) {
     return axios.post(`${this.apiUrl}/user/login`, credentials)
       .then(response => {
-        // Store the userId in localStorage
-        const { userId } = response.data;
+        const { token, userId } = response.data;
+        // Store JWT token and userId in localStorage
+        localStorage.setItem('jwtToken', token);
         localStorage.setItem('userId', userId);
+        console.log(response);
         return response.data;
       })
       .catch((error: any) => {
@@ -63,8 +89,9 @@ export class UserService {
   loginAdmin(credentials: { username: string; password: string }) {
     return axios.post(`${this.apiUrl}/admin/login`, credentials)
       .then(response => {
-        // Store the userId in localStorage
-        const { userId } = response.data;
+        const { token, userId } = response.data;
+        // Store JWT token and userId in localStorage
+        localStorage.setItem('jwtToken', token);
         localStorage.setItem('userId', userId);
         return response.data;
       })
@@ -79,8 +106,10 @@ export class UserService {
   }
 
   // Fetch user details
-  async getUserDetails(userId: number) {
+  async getUserDetails() {
     try {
+      const userId = localStorage.getItem('userId');
+      if (!userId) throw new Error('User ID not found');
       const response = await axios.get(`${this.apiUrl}/user/${userId}`);
       return response.data;
     } catch (error: any) {
@@ -94,8 +123,10 @@ export class UserService {
   }
 
   // Update user details
-  async updateUser(userId: number, updatedData: any) {
+  async updateUser(updatedData: any) {
     try {
+      const userId = localStorage.getItem('userId');
+      if (!userId) throw new Error('User ID not found');
       await axios.put(`${this.apiUrl}/user/${userId}`, updatedData);
     } catch (error: any) {
       if (this.isAxiosError(error)) {
@@ -105,5 +136,12 @@ export class UserService {
       }
       throw error;
     }
+  }
+
+  // Logout function to clear token and userId
+  logout() {
+    localStorage.removeItem('jwtToken');
+    localStorage.removeItem('userId');
+    this.router.navigate(['/login']);
   }
 }

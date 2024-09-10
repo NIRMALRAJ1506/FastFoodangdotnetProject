@@ -17,6 +17,7 @@ import { OrderlistComponent } from './Components/orderlist/orderlist.component';
 import { ManageUsersComponent } from './Components/manage-users/manage-users.component';
 import { CartComponent } from './Components/cart/cart.component';
 import { FeedbacksComponent } from './Components/feedbacks/feedbacks.component';
+import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [ 
   {path:"",component:HomeComponent},
@@ -25,8 +26,8 @@ const routes: Routes = [
 {path:"signup",component:SignupComponent},
 {path:"aboutus",component:AboutusComponent},
 {path:"contactus",component:ContactUsComponent},
-{path:"userdash",component:UserdashboardComponent},
-{path:"admindash",component:AdmindashboardComponent},
+{path:"userdash",component:UserdashboardComponent,canActivate:[AuthGuard]},
+{path:"admindash",component:AdmindashboardComponent,canActivate:[AuthGuard]},
 {path:"manageitems",component:ManageitemsComponent},
 { path: 'add-food-item', component: FooditemformComponent },
 { path: 'update-food-item/:id', component: FooditemformComponent },
@@ -37,7 +38,8 @@ const routes: Routes = [
 {path:'order-list',component:OrderlistComponent},
 {path:'manageusers',component:ManageUsersComponent},
 {path:'cart',component:CartComponent},
-{path:'feedbacks',component:FeedbacksComponent}
+{path:'feedbacks',component:FeedbacksComponent},
+{ path: '**', redirectTo: 'login', pathMatch: 'full' }
 
 ];
 
