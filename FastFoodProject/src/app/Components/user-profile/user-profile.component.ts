@@ -49,7 +49,7 @@ export class UserProfileComponent implements OnInit {
     try {
       await axios.delete(`http://localhost:5270/api/user/${this.userId}`);
       // Navigate back to the dashboard or another page
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/home']);
     } catch (error) {
       console.error('Error deleting user profile', error);
     }

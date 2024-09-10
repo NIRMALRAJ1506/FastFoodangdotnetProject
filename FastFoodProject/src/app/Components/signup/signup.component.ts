@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../shared/services/user.service'; // Adjust the path according to your project structure
 
@@ -7,26 +7,26 @@ import { UserService } from '../../shared/services/user.service'; // Adjust the 
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent {
-  signupForm: FormGroup;
-  roles = ['User', 'Admin']; // Dropdown options (this is for display only now)
+export class SignupComponent implements OnInit {
+  signupForm!: FormGroup; // Non-null assertion operator
 
-  constructor(private fb: FormBuilder, private userService: UserService) {
+  constructor(private fb: FormBuilder, private userService: UserService) {}
+
+  ngOnInit(): void {
     this.signupForm = this.fb.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]{3,20}$')]],
       dob: ['', Validators.required],
-      contactNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]], // Validate contact number
-      username: ['', Validators.required],
+      contactNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      username: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_]{4,15}$')]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      role: ['User', Validators.required] // Default role is 'User'
+      password: ['', [Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]],
+      role: ['User', Validators.required]
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.signupForm.valid) {
-      const formData = { ...this.signupForm.value, role: 'User' }; // Force role to 'User'
-      
+      const formData = this.signupForm.value;
       this.userService.registerUser(formData)
         .then(response => {
           console.log('User registration successful', response);

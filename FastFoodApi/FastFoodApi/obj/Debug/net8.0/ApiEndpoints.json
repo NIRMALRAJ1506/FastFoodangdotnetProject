@@ -33,6 +33,16 @@
   },
   {
     "ContainingType": "FastFoodApi.Controllers.FeedbackController",
+    "Method": "LoadFeedback",
+    "RelativePath": "api/Feedback",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FastFoodApi.Controllers.FeedbackController",
     "Method": "SubmitFeedback",
     "RelativePath": "api/Feedback",
     "HttpMethod": "POST",

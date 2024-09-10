@@ -21,10 +21,19 @@
   }
   
   .feedback-table th {
-    background-color: #f4f4f4;
+    background-color: #007bff;
   }
   
   .feedback-table td {
     background-color: #fff;
   }
+  
+  .mar{
+    background: url('/assets/images/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh; /* Ensures the background covers at least the full height of the viewport */
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column; 
+}
   

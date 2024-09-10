@@ -3,6 +3,7 @@
     padding: 20px;
     max-width: 1200px;
     margin: auto;
+    
   }
   
   h2 {
@@ -80,5 +81,11 @@
   
   .update-user-form button {
     margin-top: 10px;
+  }
+
+  .mar{
+    background: url('/assets/images/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
   }
   

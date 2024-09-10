@@ -21,6 +21,8 @@
     max-width: 1200px;
     margin: auto;
     padding: 20px;
+    
+   
   }
   
   .card {
@@ -93,5 +95,12 @@
   
   .footer a:hover {
     text-decoration: underline;
+  }
+
+  .mar{
+    background: url('/assets/images/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height:100vh;
+    color: white;
   }
   

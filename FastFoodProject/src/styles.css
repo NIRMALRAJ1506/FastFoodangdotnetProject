@@ -3,9 +3,5 @@
 html, body 
 { 
     height: 100%;
-    background: url('/assets/images/background.jpg') no-repeat center center fixed;
-    background-size: cover; 
-    padding-top: 20px;
-    color: white;
 }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

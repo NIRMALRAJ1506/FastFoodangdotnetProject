@@ -1,4 +1,10 @@
-
+.mar{
+    background: url('/assets/images/background.jpg') no-repeat center center fixed;
+    background-size: cover; 
+    padding-top: 20px;
+    color: white;
+}
+    
 .contact-us-container {
     margin-top: 60px; /* Adjust the value as needed */
     max-width: 600px;
@@ -8,7 +14,9 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+    
+}
+    
     
     .contact-us-container h1 {
     text-align: center;

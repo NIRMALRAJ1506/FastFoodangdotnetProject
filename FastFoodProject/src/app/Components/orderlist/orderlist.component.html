@@ -1,3 +1,4 @@
+<div class="mar">
 <div class="orders-container">
     <h2>Your Orders</h2>
     <div *ngIf="userOrders.length > 0; else noOrders">
@@ -21,9 +22,10 @@
         </div>
       </div>
     </div>
+
   
     <ng-template #noOrders>
       <p>You have no orders yet.</p>
     </ng-template>
   </div>
-  
+  </div>

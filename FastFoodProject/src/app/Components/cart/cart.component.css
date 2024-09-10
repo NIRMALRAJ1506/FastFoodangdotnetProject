@@ -3,6 +3,9 @@
     background-color: #f8f9fa; /* Light background for the cart */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a lifted effect */
+    background: url('/assets/images/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height:  100vh;
   }
   
   .cart-container h2 {
@@ -19,6 +22,7 @@
   table {
     width: 100%;
     border-collapse: collapse;
+    color:white;
   }
   
   table th, table td {
@@ -30,6 +34,7 @@
   table th {
     background-color: #e9ecef; /* Light gray background for header */
     font-weight: bold;
+    color: black;
   }
   
   .cart-image {

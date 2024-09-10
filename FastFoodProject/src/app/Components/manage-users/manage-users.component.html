@@ -1,6 +1,7 @@
 <!-- manage-users.component.html -->
+<div class="mar">
 <div class="manage-users-container">
-    <h2>Manage Users</h2>
+    <h2 style="color: white;">Manage Users</h2>
     <div *ngIf="loading">Loading...</div>
     <div *ngIf="error">{{ error }}</div>
     <div *ngIf="!loading && users.length > 0">
@@ -63,4 +64,4 @@
       </form>
     </div>
   </div>
-  
+</div>

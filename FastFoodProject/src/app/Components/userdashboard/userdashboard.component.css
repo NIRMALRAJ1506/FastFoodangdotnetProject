@@ -1,10 +1,18 @@
 /* src/app/userdashboard/userdashboard.component.css */
 
 /* Ensures that the specific styling for the UserdashboardComponent is applied correctly */
+.mar {
+  background: url('/assets/images/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh; /* Ensures that the container takes at least the full viewport height */
+  display: flex;
+  flex-direction: column;
+}
+
 .dashboard-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  flex: 1; /* Allows the container to expand and fill the available space */
 }
 
 .header {
@@ -35,6 +43,7 @@
 .main-content {
   display: flex;
   flex: 1;
+  overflow: hidden; /* Prevents any overflow */
 }
 
 /* Sidebar styles */
@@ -43,6 +52,7 @@
   background-color: #f4f4f4;
   border-right: 1px solid #ddd;
   overflow-y: auto;
+  height: calc(100vh - 60px); /* Adjust height to account for header */
 }
 
 /* Navigation menu styles */
@@ -69,6 +79,8 @@
 .content {
   flex: 1;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Food Items Section */

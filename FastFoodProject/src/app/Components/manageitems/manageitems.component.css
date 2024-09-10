@@ -1,6 +1,8 @@
 /* General styles */
 body {
   font-family: Arial, sans-serif;
+  background: url('/assets/images/background.jpg') no-repeat center center fixed;
+  background-size: cover;
 }
 
 /* Container for the whole manage items section */
@@ -177,4 +179,26 @@ body {
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+}
+
+/* Ensure the background covers the full page */
+.mar {
+  background: url('/assets/images/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh; /* Ensures the background covers at least the full height of the viewport */
+  display: flex;
+  flex-direction: column; /* Ensure the content stacks vertically */
+}
+
+/* Ensure the main content area takes up available vertical space */
+.manage-items-container {
+  flex: 1; /* This will ensure that the content stretches to fill the remaining space in the flex container */
+}
+
+/* General body styles */
+body {
+  margin: 0; /* Ensure there’s no margin on the body */
+  padding: 0;
+  font-family: Arial, sans-serif;
+  min-height: 100vh; /* Ensures body also takes up full height */
 }

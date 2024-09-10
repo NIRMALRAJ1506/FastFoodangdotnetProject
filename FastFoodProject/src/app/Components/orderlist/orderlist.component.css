@@ -2,6 +2,7 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+   
   }
   
   .orders-container h2 {
@@ -17,6 +18,7 @@
     padding: 15px;
     margin-bottom: 20px;
     transition: transform 0.2s ease;
+    
   }
   
   .order-card:hover {
@@ -43,6 +45,7 @@
   .order-info p {
     margin: 0;
     padding: 5px 0;
+    color:black;
   }
   
   .order-info p strong {
@@ -85,4 +88,9 @@
       width: 100px;
     }
   }
-  
+.mar{
+  background: url('/assets/images/background.jpg')  center center fixed;
+  background-size: cover;
+  height: 1000vh;
+  color: white;
+}

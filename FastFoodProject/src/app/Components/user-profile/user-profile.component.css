@@ -5,9 +5,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
     background-color: #f9f9f9;
-    padding: 20px;
+    background: url('/assets/images/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height:  120vh;
+    padding: 0px;
   }
   
   .profile-box {
@@ -70,4 +72,6 @@
   .edit-form .form-group input {
     border-color: #007bff;
   }
+
+
   
