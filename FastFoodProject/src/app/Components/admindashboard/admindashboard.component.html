@@ -1,9 +1,14 @@
 <!-- admindashboard.component.html -->
+ <div class="mar">
 <div class="dashboard-container">
   <header class="header">
-    <button class="menu-button" (click)="toggleMenu()">Menu</button>
-    <h1>Admin Dashboard</h1>
-    <button class="logout-button" (click)="logout()">Logout</button>
+    <button class="menu-button" (click)="toggleMenu()">
+      <i class="fas fa-bars"></i> <!-- Menu icon -->
+    </button>
+    <h1><img class="logo" src="/assets/images/logo.JPG"></h1>
+    <button class="logout-button" (click)="logout()">
+      <i class="fas fa-sign-out-alt"></i> <!-- Logout icon -->
+    </button>
   </header>
 
   <div class="main-content">
@@ -43,4 +48,5 @@
       <router-outlet></router-outlet>
     </div>
   </div>
+</div>
 </div>

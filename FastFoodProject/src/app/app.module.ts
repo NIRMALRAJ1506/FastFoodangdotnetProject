@@ -36,6 +36,7 @@ import { ManageUsersComponent } from './Components/manage-users/manage-users.com
 import { CartComponent } from './Components/cart/cart.component';
 import { FeedbacksComponent } from './Components/feedbacks/feedbacks.component';
 import { CaroselComponent } from './Components/carosel/carosel.component';
+import { MenuComponent } from './Components/menu/menu.component';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { CaroselComponent } from './Components/carosel/carosel.component';
     ManageUsersComponent,
     CartComponent,
     FeedbacksComponent,
-    CaroselComponent
+    CaroselComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

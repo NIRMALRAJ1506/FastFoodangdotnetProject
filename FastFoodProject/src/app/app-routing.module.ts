@@ -18,6 +18,7 @@ import { ManageUsersComponent } from './Components/manage-users/manage-users.com
 import { CartComponent } from './Components/cart/cart.component';
 import { FeedbacksComponent } from './Components/feedbacks/feedbacks.component';
 import { AuthGuard } from './shared/auth.guard';
+import { MenuComponent } from './Components/menu/menu.component';
 
 const routes: Routes = [ 
   {path:"",component:HomeComponent},
@@ -39,6 +40,7 @@ const routes: Routes = [
 {path:'manageusers',component:ManageUsersComponent,canActivate:[AuthGuard]},
 {path:'cart',component:CartComponent,canActivate:[AuthGuard]},
 {path:'feedbacks',component:FeedbacksComponent,canActivate:[AuthGuard]},
+{path:'menu',component:MenuComponent},
 { path: '**', redirectTo: 'login', pathMatch: 'full' }
 
 ];

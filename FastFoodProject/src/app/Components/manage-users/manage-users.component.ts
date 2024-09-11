@@ -47,18 +47,18 @@ export class ManageUsersComponent implements OnInit {
     this.isEditing = true;
   }
 
-  async updateUser() {
-    try {
-      await axios.put(`http://localhost:5270/api/user/${this.selectedUser.id}`, this.selectedUser);
-      this.users = this.users.map(user =>
-        user.id === this.selectedUser.id ? { ...this.selectedUser } : user
-      );
-      this.isEditing = false;
-      this.selectedUser = null;
-    } catch (error) {
-      console.error('Error updating user:', error);
-    }
-  }
+  // async updateUser() {
+  //   try {
+  //     await axios.put(`http://localhost:5270/api/user/${this.selectedUser.id}`, this.selectedUser);
+  //     this.users = this.users.map(user =>
+  //       user.id === this.selectedUser.id ? { ...this.selectedUser } : user
+  //     );
+  //     this.isEditing = false;
+  //     this.selectedUser = null;
+  //   } catch (error) {
+  //     console.error('Error updating user:', error);
+  //   }
+  // }
 
   cancelEdit() {
     this.isEditing = false;

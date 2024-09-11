@@ -24,8 +24,10 @@
             <td>{{ user.username }}</td>
             <td>{{ user.email }}</td>
             <td>
-              <button (click)="editUser(user)">Update</button>
-              <button (click)="deleteUser(user.id)">Delete</button>
+              <!-- <button (click)="editUser(user)">Update</button> -->
+              <button class="btn-delete" (click)="deleteUser(user.id)">
+                <i class="fas fa-trash"></i>
+              </button>
             </td>
           </tr>
         </tbody>
@@ -35,7 +37,7 @@
       <p>No users found.</p>
     </ng-template>
   
-    <!-- Update User Form -->
+    <!-- Update User Form
     <div *ngIf="isEditing" class="update-user-form">
       <h3>Update User</h3>
       <form (ngSubmit)="updateUser()">
@@ -59,9 +61,9 @@
           Email:
           <input [(ngModel)]="selectedUser.email" name="email" type="email" required />
         </label>
-        <button type="submit">Update</button>
-        <button type="button" (click)="cancelEdit()">Cancel</button>
+        <!-- <button type="submit">Update</button> -->
+        <!-- <button type="button" (click)="cancelEdit()">Cancel</button>
       </form>
     </div>
   </div>
-</div>
+</div>  -->

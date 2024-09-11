@@ -1,88 +1,129 @@
 <app-navbar></app-navbar>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raayan Fast Foods</title>
 
     
 
-    
-</head>
-<body>
+<div class="homepage">
     <!-- Hero Section -->
-    <div id="hero" style="text-align: center; padding: 50px;">
-        <h1>Welcome to Raayan Fast Foods</h1>
-        <p>Your favorite fast food, delivered right to your doorstep!</p>
-        <a href="#featured" class="btn btn-primary" style="padding: 10px 20px; font-size: 16px; text-decoration: none; color: white; background: #007bff; border-radius: 5px;">Explore Our Menu</a>
+  <header id="home" class="header">
+    <div class="overlay text-white text-center">
+        <h1 class="display-2 font-weight-bold my-3">Raayan Fast Food</h1>
+        <h2 class="display-4 mb-5">Always fresh &amp; Delightful</h2>
+        <a class="btn btn-lg btn-primary" href="#gallary">View Our gallery</a>
     </div>
-
+</header>
     <!-- Carousel Section -->
      <app-carosel></app-carosel>
     <!-- Carousel Section -->
-    
-
-    
 
 
 
-    <!-- Featured Products Section -->
-    <div id="featured" style="padding: 50px; ">
-        <div style="text-align: center;">
-            <h2>Most Selling Products</h2>
-            <div style="display: flex; flex-wrap: wrap; justify-content: center;">
-                <!-- Existing Products -->
-                <div style="width: 30%; margin: 10px; text-align: center;">
-                    <img src="assets/images/cb.jfif" alt="Cheesy Burger" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
-                    <h3>Cheesy Burger</h3>
-                    <p>A juicy beef patty with melted cheese, lettuce, and tomato. A customer favorite!</p>
-                </div>
-                <div style="width: 30%; margin: 10px; text-align: center;">
-                    <img src="assets/images/cf.jfif" alt="Crispy Fries" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
-                    <h3>Crispy Fries</h3>
-                    <p>Golden and crispy fries, perfect for snacking or as a side.</p>
-                </div>
-                <div style="width: 30%; margin: 10px; text-align: center;">
-                    <img src="assets/images/ms.jfif" alt="Classic Milkshake" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
-                    <h3>Classic Milkshake</h3>
-                    <p>Rich and creamy milkshake in your favorite flavor. A must-try!</p>
-                </div>
-                <!-- New Products -->
-                <div style="width: 30%; margin: 10px; text-align: center;">
-                    <img src="assets/images/cr.jfif" alt="Chicken Fried Rice" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
-                    <h3>Chicken Fried Rice</h3>
-                    <p>Flavorful fried rice with tender chicken pieces and fresh vegetables.</p>
-                </div>
-                <div style="width: 30%; margin: 10px; text-align: center;">
-                    <img src="assets/images/noo.jfif" alt="Noodles" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
-                    <h3>Noodles</h3>
-                    <p>Stir-fried noodles with a mix of fresh vegetables and savory sauce.</p>
-                </div>
-                <div style="width: 30%; margin: 10px; text-align: center;">
-                    <img src="assets/images/cc.jfif" alt="Chilly Chicken" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
-                    <h3>Chilly Chicken</h3>
-                    <p>Spicy and tangy chicken stir-fry with bell peppers and onions.</p>
-                </div>
-                <div style="width: 30%; margin: 10px; text-align: center;">
-                    <img src="assets/images/pc.jfif" alt="Pepper Chicken" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
-                    <h3>Pepper Chicken</h3>
-                    <p>Spicy pepper chicken with a rich and aromatic sauce.</p>
-                </div>
-                <div style="width: 30%; margin: 10px; text-align: center;">
-                    <img src="assets/images/cl.jfif" alt="Chicken Lollipop" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
-                    <h3>Chicken Lollipop</h3>
-                    <p>Fried chicken lollipops with a crispy coating and flavorful seasoning.</p>
-                </div>
-                <div style="width: 30%; margin: 10px; text-align: center;">
-                    <img src="assets/images/soup.jfif" alt="Soup" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
-                    <h3>Soup</h3>
-                    <p>Hearty and comforting soup made with fresh ingredients and a rich broth.</p>
+    <!-- Gallery Section -->
+    <div id="gallary" class="text-center bg-dark text-light has-height-md middle-items wow fadeIn"></div>
+        <h2 class="section-title">Gallery</h2>
+
+    <div class="gallary row">
+        <div class="col-sm-6 col-lg-3 gallary-item wow fadeIn">
+            <img src="assets/images/beefburger.jpeg" alt="template by DevCRID http://www.devcrud.com/" class="gallary-img" height="300px" width="500px">
+            <div href="#" class="gallary-overlay">
+                <i class="gallary-icon ti-plus"></i>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 gallary-item wow fadeIn">
+            <img src="assets/images/cheesychickenpizza.jpeg"alt="template by DevCRID http://www.devcrud.com/" class="gallary-img" height="300px" width="500px">
+            <div href="#" class="gallary-overlay">
+                <i class="gallary-icon ti-plus"></i>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 gallary-item wow fadeIn">
+            <img src="assets/images/cornfries.jpeg" alt="template by DevCRID http://www.devcrud.com/" class="gallary-img" height="300px" width="500px">
+            <div href="#" class="gallary-overlay">
+                <i class="gallary-icon ti-plus"></i>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 gallary-item wow fadeIn">
+            <img src="assets/images/grilledchicken.jpeg" alt="template by DevCRID http://www.devcrud.com/" class="gallary-img" height="300px" width="500px">
+            <div href="#" class="gallary-overlay">
+                <i class="gallary-icon ti-plus"></i>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 gallary-item wow fadeIn">
+            <img src="assets/images/Hamburger.jpeg" alt="template by DevCRID http://www.devcrud.com/" class="gallary-img" height="300px" width="500px">
+            <div href="#" class="gallary-overlay">
+                <i class="gallary-icon ti-plus"></i>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 gallary-item wow fadeIn">
+            <img src="assets/images/Masalanoodles.jpeg" alt="template by DevCRID http://www.devcrud.com/" class="gallary-img" height="300px" width="500px">
+            <div href="#" class="gallary-overlay">
+                <i class="gallary-icon ti-plus"></i>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 gallary-item wow fadeIn">
+            <img src="assets/images/savorychickenfeast.jpeg" alt="template by DevCRID http://www.devcrud.com/" class="gallary-img" height="300px" width="500px">
+            <div href="#" class="gallary-overlay">
+                <i class="gallary-icon ti-plus"></i>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 gallary-item wow fadeIn">
+            <img src="assets/images/tc.jpeg" alt="template by DevCRID http://www.devcrud.com/" class="gallary-img" height="300px" width="500px">
+            <div href="#" class="gallary-overlay">
+                <i class="gallary-icon ti-plus"></i>
+            </div>
+        </div>
+       
+    <!-- Gallery Section -->
+
+      <!--BLOG -->
+    <div id="blog" class="container-fluid  text-light py-5 text-center wow fadeIn"></div>
+        <h2 class="section-title py-5">EVENTS AT THE FOOD HUT</h2>
+        <div class="row justify-content-center">
+            <!-- <div class="col-sm-7 col-md-4 mb-5">
+                <ul class="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
+                </ul>
+            </div> -->
+        </div>
+        <div class="card-container">
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="foods" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card bg-transparent border my-3 my-md-0">
+                            <img src="assets/images/seasonedfrenchfries.jpeg" alt="template by DevCRID http://www.devcrud.com/" class="rounded-0 card-img-top mg-responsive">
+                            <div class="card-body">
+                                <h1 class="text-center mb-4"><a  class="badge badge-primary">$5</a></h1>
+                                <h4 class="pt20 pb20" style="color:white;">Seasonedfrenchfries </h4>
+                                <p class="text-white">Crispy, golden fries perfectly seasoned with a blend of savory spices for a mouthwatering taste. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-transparent border my-3 my-md-0">
+                            <img src="assets/images/beefburger.jpeg" alt="template by DevCRID http://www.devcrud.com/" class="rounded-0 card-img-top mg-responsive">
+                            <div class="card-body">
+                                <h1 class="text-center mb-4"><a  class="badge badge-primary">$12</a></h1>
+                                <h4 class="pt20 pb20" style="color:white;">Beefburger</h4>
+                                <p class="text-white">Juicy, grilled beef patty served with fresh vegetables and a toasted bun for a classic burger experience. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-transparent border my-3 my-md-0">
+                            <img src="assets/images/Masalanoodles.jpeg" alt="template by DevCRID http://www.devcrud.com/" class="rounded-0 card-img-top mg-responsive">
+                            <div class="card-body">
+                                <h1 class="text-center mb-4"><a  class="badge badge-primary">$8</a></h1>
+                                <h4 class="pt20 pb20" style="color:white;">Masalanoodles</h4>
+                                <p class="text-white">Flavorful noodles stir-fried with a zesty blend of Indian spices and colorful vegetables. </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        </div>
+        
+            
     </div>
-
+    
     <!-- Special Offers Section -->
     <div id="special-offers" style="padding: 50px; ">
         <div style="text-align: center;">
@@ -122,28 +163,51 @@
     </div>
 
     <!-- Customer Reviews Section -->
-    <div id="customer-reviews" style="padding: 50px; ">
-        <div style="text-align: center;">
-            <h2>What Our Customers Say</h2>
-            <div style="max-width: 800px; margin: 0 auto;">
-                <div style="font-style: italic; margin: 20px 0;">
-                    <p>"The best fast food experience I've ever had! The burgers are amazing and the service is top-notch." – Jane D.</p>
+    <div id="testmonial" class="container-fluid wow fadeIn text-light has-height-lg middle-items">
+        <h2 class="section-title my-5 text-center">REVIEWS</h2>
+        <div class="row mt-3 mb-5">
+            <div class="col-md-4 my-3 my-md-0">
+                <div class="testmonial-card">
+                    <h3 class="testmonial-title">John Doe</h3>
+                    <h6 class="testmonial-subtitle">Web Designer</h6>
+                    <div class="testmonial-body">
+                        <p>"An exceptional experience at this shop! The quality of the food is top-notch, and the customer service is outstanding. Highly recommend their signature dishes!"</p>
+                    </div>
                 </div>
-                <div style="font-style: italic; margin: 20px 0;">
-                    <p>"I love the crispy fries and the milkshakes are out of this world! Highly recommend!" – Mark S.</p>
+            </div>
+            <div class="col-md-4 my-3 my-md-0">
+                <div class="testmonial-card">
+                    <h3 class="testmonial-title">Steve Thomas</h3>
+                    <h6 class="testmonial-subtitle">UX/UI Designer</h6>
+                    <div class="testmonial-body">
+                        <p>"I love coming here! The atmosphere is fantastic, and the menu offers a great variety of delicious options. Each visit is a culinary delight."</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 my-3 my-md-0">
+                <div class="testmonial-card">
+                    <h3 class="testmonial-title">Miranda Joy</h3>
+                    <h6 class="testmonial-subtitle">Graphic Designer</h6>
+                    <div class="testmonial-body">
+                        <p>"A hidden gem! The flavors are incredible, and the staff are always friendly and welcoming. This shop is my new go-to for great food and a pleasant dining experience."</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
+    
     <!-- Contact Us Section -->
-<div id="contact-us" style="padding: 50px; ">
+<div id="contact-us"  style="padding: 50px;">
     <div class="contact-container">
       <div class="contact-info">
+        <div class="section-title">
         <h2>Contact Us</h2>
-        <p><strong>Shop Name:</strong> Raayan Fast Foods</p>
-        <p><strong>Contact Number:</strong> +123 456 7890</p>
-        <p><strong>Email:</strong> contact&#64;raayanfastfoods.com</p>
+        </div>
+        <div style="font-size: 30px;">
+        <p> Raayan Fast Foods</p>
+        <p>+123 456 7890</p>
+        <p>Email:raayanfastfoods&#64;gmail.com</p>
+        </div>
       </div>
       <div class="contact-map">
         <iframe
@@ -153,9 +217,8 @@
     </div>
   </div>
   
-
+</div>
     <!-- Bootstrap JS and dependencies -->
    
-</body>
-</html>
+
 <app-footer></app-footer>

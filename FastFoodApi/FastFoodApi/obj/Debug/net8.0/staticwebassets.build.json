@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Ib2DcZsT7MpGfcKTdKcaragQTqrEmUfVyJpNGmAtQek=",
+  "Hash": "iRotib2FQLxNTyRt7maqFKLk34S41JVrTyZ8ctt5B2A=",
   "Source": "FastFoodApi",
   "BasePath": "_content/FastFoodApi",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "FastFoodApi\\wwwroot",
       "Source": "FastFoodApi",
-      "ContentRoot": "C:\\Users\\Nirmal Raj\\Desktop\\Project\\FastFoodangdotnetProject\\FastFoodApi\\FastFoodApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\nirmalraj.s\\Desktop\\angulardotnetProject-CP\\FastFoodangdotnetProject\\FastFoodApi\\FastFoodApi\\wwwroot\\",
       "BasePath": "_content/FastFoodApi",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\Nirmal Raj\\Desktop\\Project\\FastFoodangdotnetProject\\FastFoodApi\\FastFoodApi\\wwwroot\\Images\\chickenpizza.jfif",
+      "Identity": "C:\\Users\\nirmalraj.s\\Desktop\\angulardotnetProject-CP\\FastFoodangdotnetProject\\FastFoodApi\\FastFoodApi\\wwwroot\\Images\\chickenpizza.jfif",
       "SourceId": "FastFoodApi",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Nirmal Raj\\Desktop\\Project\\FastFoodangdotnetProject\\FastFoodApi\\FastFoodApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\nirmalraj.s\\Desktop\\angulardotnetProject-CP\\FastFoodangdotnetProject\\FastFoodApi\\FastFoodApi\\wwwroot\\",
       "BasePath": "_content/FastFoodApi",
       "RelativePath": "Images/chickenpizza.jfif",
       "AssetKind": "All",

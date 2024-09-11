@@ -202,3 +202,10 @@ body {
   font-family: Arial, sans-serif;
   min-height: 100vh; /* Ensures body also takes up full height */
 }
+
+.edit-button{
+  background-color: green;
+}
+.delete-button{
+  background-color: red;
+}

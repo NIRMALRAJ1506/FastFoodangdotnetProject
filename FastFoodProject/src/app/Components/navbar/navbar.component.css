@@ -1,17 +1,23 @@
 /* Navbar styling */
 .navbar {
     position: fixed;
-    top: 0; /* Ensure it's positioned at the top */
-    left: 0; /* Ensure it starts from the left edge */
-    right: 0; /* Ensure it stretches to the right edge */
+    top: 0;
+    left: 0;
+    right: 0;
     display: flex;
     align-items: center;
-    justify-content: space-between; 
+    justify-content: space-between;
     height: 80px;
-    background-color: #333; 
-    padding: 0 20px; 
+    background-color: transparent; /* Default transparent */
+    padding: 0 20px;
     box-sizing: border-box;
-    z-index: 1000; /* Ensure it is above other content */
+    z-index: 1000;
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+/* Solid navbar styling when scrolled */
+.navbar.scrolled {
+    background-color: #333; /* Solid background color */
 }
 
 /* Navbar logo styling */
@@ -23,8 +29,8 @@
 }
 
 .navbar-logo img {
-    height: 70px; 
-    margin-right: 10px; 
+    height: 70px;
+    margin-right: 10px;
 }
 
 .navbar-logo span {
@@ -36,18 +42,18 @@
 .nav {
     list-style: none;
     display: flex;
-    align-items: center; 
+    align-items: center;
     margin: 0;
     padding: 0;
 }
 
 .nav-item a {
-    color: #fff; 
+    color: #fff;
     font-size: 20px;
     font-weight: 400;
     text-decoration: none;
     transition: color 0.3s ease-out;
-    padding: 0 10px; 
+    padding: 0 10px;
 }
 
 .nav-item a:hover {
@@ -65,12 +71,12 @@
     padding: 5px;
     border: none;
     border-radius: 4px;
-    display: none; 
+    display: none;
 }
 
 /* Menu toggle styling */
 .menu-toggle {
-    display: none; 
+    display: none;
     flex-direction: column;
     cursor: pointer;
 }
@@ -83,10 +89,10 @@
 }
 
 /* Gradient bar styling */
-.grad-bar {
+/* .grad-bar {
     height: 4px;
     background: linear-gradient(to right, #007bff, #00c6ff);
-}
+} */
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -102,7 +108,7 @@
     }
 
     .nav.show {
-        display: flex; 
+        display: flex;
     }
 
     .menu-toggle {
