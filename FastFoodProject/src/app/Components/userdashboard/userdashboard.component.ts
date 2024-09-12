@@ -15,19 +15,26 @@ export class UserdashboardComponent implements OnInit {
   showMenu: boolean = false;
   selectedItem: any;
   token: string | null = null;
+  loading: boolean = true;
+  error: string | null = null;
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.token = localStorage.getItem('jwtToken');
-    this.loadFoodItems();
+    
+    if (this.token) {
+      this.loadFoodItems(); // Load food items only if the token is available
+    } else {
+      console.error('No JWT token found');
+      this.error = 'Authentication error. Please log in again.';
+      this.loading = false;
+    }
   }
 
   async loadFoodItems() {
-    if (!this.token) {
-      console.error('No JWT token found');
-      return;
-    }
+    this.loading = true;
+    this.error = null;
 
     try {
       const response = await axios.get('http://localhost:5270/api/fooditems', {
@@ -35,15 +42,15 @@ export class UserdashboardComponent implements OnInit {
           'Authorization': `Bearer ${this.token}`
         }
       });
+      
+      console.log('API Response:', response.data); // Log API response for debugging
       this.foodItems = response.data;
       this.filteredItems = this.foodItems;
       this.extractFoodTypes();
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        console.error('Error loading food items', error.response?.data || error.message);
-      } else {
-        console.error('Unexpected error', error);
-      }
+      this.handleApiError(error, 'Error loading food items');
+    } finally {
+      this.loading = false;
     }
   }
 
@@ -65,19 +72,26 @@ export class UserdashboardComponent implements OnInit {
     return `${imageName}`;
   }
 
-  orderNow(item: any) {
+  async orderNow(item: any) {
     this.selectedItem = item;
-    this.createOrder(item);
+    await this.createOrder(item);
   }
 
   async createOrder(item: any) {
-    const userId = localStorage.getItem('userId');
-    if (!userId) {
-      console.error('User not logged in');
+    if (!this.token) {
+      console.error('No JWT token found');
+      this.error = 'Authentication error. Please log in again.';
       return;
     }
 
     try {
+      const userId = localStorage.getItem('userId');
+      if (!userId) {
+        console.error('User not logged in');
+        this.error = 'User not logged in. Please log in first.';
+        return;
+      }
+
       const orderCreateModel = {
         orderNumber: `ORD-${new Date().getTime()}`, // Generate a unique order number
         totalPrice: item.price,
@@ -90,19 +104,14 @@ export class UserdashboardComponent implements OnInit {
       const response = await axios.post('http://localhost:5270/api/order', orderCreateModel, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.token}`
+          'Authorization': `Bearer ${this.token}` // Include token in the request
         }
       });
 
       console.log('Order created successfully', response.data); // Log response
       this.router.navigate(['/order-confirmation', response.data.id]);
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        console.error('Error creating order', error.response?.data || error.message);
-      } else {
-        console.error('Unexpected error', error);
-      }
-      alert('Failed to create order. Please try again.');
+      this.handleApiError(error, 'Error creating order');
     }
   }
 
@@ -137,5 +146,15 @@ export class UserdashboardComponent implements OnInit {
     localStorage.removeItem('cart'); // Clear cart from localStorage on logout
     localStorage.removeItem('jwtToken');  // Remove the token from localStorage
     this.router.navigate(['/login']);
+  }
+
+  private handleApiError(error: any, context: string) {
+    if (axios.isAxiosError(error)) {
+      console.error(`${context}:`, error.response?.data || error.message);
+      this.error = `${context}. Please try again later.`;
+    } else {
+      console.error('Unexpected error:', error);
+      this.error = 'Unexpected error. Please try again later.';
+    }
   }
 }

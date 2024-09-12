@@ -13,23 +13,28 @@ export class AdmindashboardComponent implements OnInit {
   totalItems: number = 0;
   totalUsers: number = 0;
   totalOrders: number = 0;
-  chart: any;
-  token:any;
+  chart: Chart | undefined;
+  token: string | null = null;
 
   fastFoodItems = [
     { name: 'Manage Items', link: '/manageitems' },
     { name: 'Manage Orders', link: '/manageorders' },
-    {name: 'Manage Users',link:'/manageusers'},
-    {name:'Feedbacks',link:'/feedbacks'}
+    { name: 'Manage Users', link: '/manageusers' },
+    { name: 'Feedbacks', link: '/feedbacks' }
   ];
 
   constructor(private router: Router) {}
 
   ngOnInit() {
-    this.fetchItemCount();
-    this.fetchUserCount();
-    this.fetchOrderCount();
-    this.token=localStorage.getItem('jwtToken')
+    this.token = localStorage.getItem('jwtToken');
+    if (this.token) {
+      this.fetchItemCount();
+      this.fetchUserCount();
+      this.fetchOrderCount();
+    } else {
+      console.error('No JWT token found');
+      this.router.navigate(['/login']);
+    }
   }
 
   toggleMenu() {
@@ -37,10 +42,12 @@ export class AdmindashboardComponent implements OnInit {
   }
 
   async fetchItemCount() {
+    if (!this.token) return;
+
     try {
-      const response = await axios.get('http://localhost:5270/api/FoodItems',{
-        headers:{
-          'Authorization':`Bearer ${this.token}`
+      const response = await axios.get('http://localhost:5270/api/FoodItems', {
+        headers: {
+          'Authorization': `Bearer ${this.token}`
         }
       });
       this.totalItems = response.data.length;
@@ -51,10 +58,12 @@ export class AdmindashboardComponent implements OnInit {
   }
 
   async fetchUserCount() {
+    if (!this.token) return;
+
     try {
-      const response = await axios.get('http://localhost:5270/api/user/count',{
-        headers:{
-          'Authorization':`Bearer ${this.token}`
+      const response = await axios.get('http://localhost:5270/api/user/count', {
+        headers: {
+          'Authorization': `Bearer ${this.token}`
         }
       });
       this.totalUsers = response.data; // Ensure this returns a number
@@ -65,12 +74,14 @@ export class AdmindashboardComponent implements OnInit {
   }
 
   async fetchOrderCount() {
+    if (!this.token) return;
+
     try {
-      const response = await axios.get('http://localhost:5270/api/order/count',{
-        headers:{
-          'Authorization':`Bearer ${this.token}`
+      const response = await axios.get('http://localhost:5270/api/order/count', {
+        headers: {
+          'Authorization': `Bearer ${this.token}`
         }
-      }); // Ensure this endpoint is correct
+      });
       this.totalOrders = response.data; // Ensure this returns a number
       this.updateChart();
     } catch (error) {
@@ -112,8 +123,7 @@ export class AdmindashboardComponent implements OnInit {
   }
 
   logout() {
-    // Perform logout logic here
-    localStorage.removeItem('jwtToken');  // Remove the token from localStorage
-  this.router.navigate(['/login']);  
+    localStorage.removeItem('jwtToken'); // Remove the token from localStorage
+    this.router.navigate(['/login']);  
   }
 }

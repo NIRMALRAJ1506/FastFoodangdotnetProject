@@ -3,9 +3,11 @@
     background-color: #f8f9fa; /* Light background for the cart */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a lifted effect */
-    background: url('/assets/images/background.jpg') no-repeat center center fixed;
-  background-size: cover;
-  height:  100vh;
+    background: url('/assets/images/background.jpg') center center no-repeat;
+    background-size: cover; /* Cover the entire container */
+    min-height: 100vh; /* Ensure it covers at least the viewport height */
+    background-attachment: fixed; /* Keep background fixed on scroll */
+    color: white;
   }
   
   .cart-container h2 {

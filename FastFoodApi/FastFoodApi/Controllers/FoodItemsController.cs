@@ -21,6 +21,8 @@ namespace FastFoodApi.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
+
         [HttpGet]
         public async Task<IActionResult> GetFoodItems()
         {

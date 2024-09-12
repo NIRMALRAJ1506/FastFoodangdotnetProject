@@ -11,7 +11,10 @@
   
 }
 .mar{
-  background-image: url('/assets/images/background.jpg') no-repeat;
+  background: url('/assets/images/background.jpg') no-repeat center;
+  min-height: 100vh; /* Ensure it covers at least the viewport height */
+  background-attachment: fixed; /* Keep background fixed on scroll */
+  color: white;
 }
 .about-us-container h1 {
   font-size: 3rem;

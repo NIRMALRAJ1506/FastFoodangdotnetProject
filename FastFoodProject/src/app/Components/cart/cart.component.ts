@@ -10,10 +10,19 @@ import axios from 'axios';
 export class CartComponent implements OnInit {
   cartItems: any[] = [];
   totalPrice: number = 0;
+  token: string | null = null;
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
+    this.token = localStorage.getItem('jwtToken');
+    
+    if (!this.token) {
+      console.error('No JWT token found');
+      this.router.navigate(['/login']);
+      return;
+    }
+
     this.loadCartItems();
   }
 
@@ -47,7 +56,8 @@ export class CartComponent implements OnInit {
 
       const response = await axios.post('http://localhost:5270/api/order', orderCreateModel, {
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.token}` // Include token in the header
         }
       });
 
@@ -55,7 +65,19 @@ export class CartComponent implements OnInit {
       localStorage.removeItem('cart'); // Clear cart after successful order
       this.router.navigate(['/order-confirmation', response.data.id]);
     } catch (error) {
-      console.error('Error creating order', error);
+      if (axios.isAxiosError(error)) {
+        console.error('Axios error response:', error.response?.data);
+        console.error('Axios error status:', error.response?.status);
+        console.error('Axios error headers:', error.response?.headers);
+        if (error.response?.status === 401) {
+          // Handle unauthorized access (e.g., redirect to login)
+          this.router.navigate(['/login']);
+        }
+      } else if (error instanceof Error) {
+        console.error('Error message:', error.message);
+      } else {
+        console.error('Unknown error type:', error);
+      }
       alert('Failed to create order. Please try again.');
     }
   }
@@ -68,6 +90,6 @@ export class CartComponent implements OnInit {
   }
 
   getImageUrl(imageName: string): string {
-    return `${imageName}`;
+    return `${imageName}`; // Modify this if you need a complete URL
   }
 }
