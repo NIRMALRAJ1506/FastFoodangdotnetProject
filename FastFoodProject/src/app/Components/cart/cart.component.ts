@@ -11,6 +11,7 @@ export class CartComponent implements OnInit {
   cartItems: any[] = [];
   totalPrice: number = 0;
   token: string | null = null;
+  showSidebar: boolean = false; // To control sidebar visibility
 
   constructor(private router: Router) {}
 
@@ -91,5 +92,26 @@ export class CartComponent implements OnInit {
 
   getImageUrl(imageName: string): string {
     return `${imageName}`; // Modify this if you need a complete URL
+  }
+
+  toggleSidebar() {
+    this.showSidebar = !this.showSidebar;
+  }
+
+  navigateToHome() {
+    this.router.navigate(['/userdash']); // Adjust route as necessary
+  }
+
+  goToOrders() {
+    this.router.navigate(['/order-list']); // Adjust route as necessary
+  }
+
+  showProfile() {
+    this.router.navigate(['/user-profile']); // Adjust route as necessary
+  }
+
+  logout() {
+    localStorage.removeItem('jwtToken');
+    this.router.navigate(['/login']);
   }
 }

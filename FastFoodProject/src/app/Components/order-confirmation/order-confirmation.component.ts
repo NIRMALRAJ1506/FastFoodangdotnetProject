@@ -14,68 +14,65 @@ export class OrderConfirmationComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
+    // Retrieve token from localStorage
     this.token = localStorage.getItem('jwtToken');
     
     if (!this.token) {
       console.error('No JWT token found');
-      // Handle scenario when no token is available (e.g., redirect to login)
       this.router.navigate(['/login']);
       return;
     }
 
+    // Fetch the order ID from the route parameters
     const orderId = this.route.snapshot.paramMap.get('id');
     if (orderId) {
       this.fetchOrderDetails(orderId);
     } else {
       console.error('No order ID found in the route parameters');
-      // Handle scenario where order ID is missing (e.g., redirect to an error page)
       this.router.navigate(['/error']);
     }
   }
 
   async fetchOrderDetails(orderId: string) {
     try {
-      if (this.isTokenExpired(this.token)) {
-        console.error('Token expired');
-        // Handle token refresh or prompt user to log in again
-        this.router.navigate(['/login']);
-        return;
-      }
-
+      // Make the API call to get order details
       const response = await axios.get(`http://localhost:5270/api/order/${orderId}`, {
         headers: {
           'Authorization': `Bearer ${this.token}`
         }
       });
 
-      console.log('API Response:', response); // Log full response object
-      console.log('API Response Data:', response.data); // Log raw data
+      // Retrieve the cart from localStorage
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+  
+      console.log('Cart:', cart); // Log cart to check structure
+      console.log('OrderItems from API:', response.data.orderItems); // Log order items to check structure
+  
+      // Calculate the quantity of each item in the order
+      const orderItemsWithQuantity = response.data.orderItems.map((item: any) => {
+        const quantity = cart.filter((cartItem: any) => cartItem.id === item.id).length;
+        console.log(`Item ID: ${item.id}, Quantity: ${quantity}`); // Log item ID and calculated quantity
+        return {
+          ...item,
+          quantity: quantity // Add calculated quantity to each item
+        };
+      });
 
-      // Map response data to extract only required fields
+      console.log('Order Items with Quantities:', orderItemsWithQuantity); // Log final result
+
+      // Store the order details including the calculated quantities
       this.orderDetails = {
-        id: response.data.id,
         orderNumber: response.data.orderNumber,
         totalPrice: response.data.totalPrice,
         status: response.data.status,
-        orderItems: response.data.orderItems // Include order items if needed
+        orderItems: orderItemsWithQuantity // Attach items with quantities
       };
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        console.error('Axios error response:', error.response?.data);
-        console.error('Axios error status:', error.response?.status);
-        console.error('Axios error headers:', error.response?.headers);
-        if (error.response?.status === 401) {
-          // Handle unauthorized access (e.g., redirect to login)
-          this.router.navigate(['/login']);
-        }
-      } else if (error instanceof Error) {
-        console.error('Error message:', error.message);
-      } else {
-        console.error('Unknown error type:', error);
-      }
+      console.error('Error fetching order details:', error);
     }
   }
 
+  // Helper method to check if the token has expired
   isTokenExpired(token: string | null): boolean {
     if (!token) return true;
 
@@ -84,7 +81,13 @@ export class OrderConfirmationComponent implements OnInit {
     return Date.now() > expiry;
   }
 
+  // Helper method to construct image URLs for food items
+  getImageUrl(imageName: string): string {
+    return `${imageName}`; // Adjust this if you have a specific image URL format
+  }
+
+  // Method to navigate back to the user dashboard
   goBack() {
-    this.router.navigate(['/userdash']); // Navigate to the user dashboard or any desired route
+    this.router.navigate(['/userdash']);
   }
 }

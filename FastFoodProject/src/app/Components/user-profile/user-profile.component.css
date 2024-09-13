@@ -1,77 +1,189 @@
-/* user-profile.component.css */
-
 .user-profile-container {
-    display: flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9f9f9;
+  background: url('/assets/images/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height: 120vh;
+  padding: 0px;
+}
+
+.profile-box {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  max-width: 600px;
+}
+
+h2.dashboard-heading {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 5px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.edit-form {
+  margin-top: 20px;
+}
+
+.edit-form .form-group input {
+  border-color: #007bff;
+}
+
+/* Header Styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  width: 100%;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+.header .logo {
+  height: 50px;
+}
+
+.header .button-group {
+  display: flex;
+  gap: 15px;
+}
+
+.header .button-group button {
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.header .button-group button:hover {
+  background-color: #0056b3;
+}
+
+/* Sidebar Navigation */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: #222;
+  padding-top: 60px;
+  transition: left 0.3s ease;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.sidebar nav {
+  padding: 15px;
+}
+
+.sidebar nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar nav ul li {
+  padding: 10px 0;
+}
+
+.sidebar nav ul li a {
+  text-decoration: none;
+  font-size: 18px;
+  color: #ddd;
+  display: block;
+}
+
+.sidebar nav ul li a:hover {
+  background-color: #007bff;
+  color: #fff;
+  padding-left: 10px;
+  transition: 0.2s;
+}
+
+/* Menu Button */
+.menu-button {
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.menu-button:hover {
+  background-color: #0056b3;
+}
+
+/* Adjustments for mobile screens */
+@media (max-width: 768px) {
+  .header {
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #f9f9f9;
-    background: url('/assets/images/background.jpg') no-repeat center center fixed;
-    background-size: cover;
-    height:  120vh;
-    padding: 0px;
+    align-items: flex-start;
   }
-  
-  .profile-box {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+
+  .sidebar {
     width: 100%;
-    max-width: 600px;
+    height: auto;
+    position: relative;
   }
-  
-  h2.dashboard-heading {
-    font-size: 24px;
-    margin-bottom: 20px;
+
+  .sidebar nav ul li {
     text-align: center;
-    color: #333;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .form-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  button {
-    background-color: #007bff;
-    border: none;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 5px;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  button:disabled {
-    background-color: #6c757d;
-    cursor: not-allowed;
-  }
-  
-  .edit-form {
-    margin-top: 20px;
-  }
-  
-  .edit-form .form-group input {
-    border-color: #007bff;
   }
 
-
-  
+  .profile-box {
+    width: 90%;
+  }
+}

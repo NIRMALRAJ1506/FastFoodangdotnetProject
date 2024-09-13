@@ -37,6 +37,7 @@ import { CartComponent } from './Components/cart/cart.component';
 import { FeedbacksComponent } from './Components/feedbacks/feedbacks.component';
 import { CaroselComponent } from './Components/carosel/carosel.component';
 import { MenuComponent } from './Components/menu/menu.component';
+import { PaymentComponent } from './Components/payment/payment.component';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { MenuComponent } from './Components/menu/menu.component';
     CartComponent,
     FeedbacksComponent,
     CaroselComponent,
-    MenuComponent
+    MenuComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,

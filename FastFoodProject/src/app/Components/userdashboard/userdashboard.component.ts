@@ -17,18 +17,17 @@ export class UserdashboardComponent implements OnInit {
   token: string | null = null;
   loading: boolean = true;
   error: string | null = null;
+  isModalVisible: boolean = false; // Control modal visibility
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.token = localStorage.getItem('jwtToken');
-    
+
     if (this.token) {
-      this.loadFoodItems(); // Load food items only if the token is available
+      this.loadFoodItems();
     } else {
-      console.error('No JWT token found');
-      this.error = 'Authentication error. Please log in again.';
-      this.loading = false;
+      this.handleTokenError();
     }
   }
 
@@ -43,7 +42,6 @@ export class UserdashboardComponent implements OnInit {
         }
       });
       
-      console.log('API Response:', response.data); // Log API response for debugging
       this.foodItems = response.data;
       this.filteredItems = this.foodItems;
       this.extractFoodTypes();
@@ -72,48 +70,26 @@ export class UserdashboardComponent implements OnInit {
     return `${imageName}`;
   }
 
-  async orderNow(item: any) {
-    this.selectedItem = item;
-    await this.createOrder(item);
+  // Opens the modal when "Order Now" is clicked
+  openOrderModal(item: any) {
+    this.selectedItem = item; // Store the selected item
+    this.isModalVisible = true; // Show the modal
   }
 
-  async createOrder(item: any) {
-    if (!this.token) {
-      console.error('No JWT token found');
-      this.error = 'Authentication error. Please log in again.';
+  // Proceed with the order when "Yes" is clicked
+  async proceedToPayment() {
+    if (!this.selectedItem) {
+      this.error = 'No item selected for order.';
       return;
     }
-
-    try {
-      const userId = localStorage.getItem('userId');
-      if (!userId) {
-        console.error('User not logged in');
-        this.error = 'User not logged in. Please log in first.';
-        return;
-      }
-
-      const orderCreateModel = {
-        orderNumber: `ORD-${new Date().getTime()}`, // Generate a unique order number
-        totalPrice: item.price,
-        orderTime: new Date().toISOString(),
-        status: 'Pending',
-        userId: userId,
-        foodItemIds: [item.id] // Only pass the FoodItem ID
-      };
-
-      const response = await axios.post('http://localhost:5270/api/order', orderCreateModel, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.token}` // Include token in the request
-        }
-      });
-
-      console.log('Order created successfully', response.data); // Log response
-      this.router.navigate(['/order-confirmation', response.data.id]);
-    } catch (error) {
-      this.handleApiError(error, 'Error creating order');
-    }
+  
+    // Pass the selected item information to the payment page
+    localStorage.setItem('selectedFoodItem', JSON.stringify(this.selectedItem));
+  
+    // Redirect to payment page
+    this.router.navigate(['/payment']);
   }
+  
 
   addToCart(item: any) {
     let cart = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -133,21 +109,6 @@ export class UserdashboardComponent implements OnInit {
     this.router.navigate(['/user-profile']);
   }
 
-  goToOrders() {
-    this.router.navigate(['/order-list']);
-  }
-
-  goToCart() {
-    this.router.navigate(['/cart']);
-  }
-
-  logout() {
-    localStorage.removeItem('userId'); // Clear userId from localStorage on logout
-    localStorage.removeItem('cart'); // Clear cart from localStorage on logout
-    localStorage.removeItem('jwtToken');  // Remove the token from localStorage
-    this.router.navigate(['/login']);
-  }
-
   private handleApiError(error: any, context: string) {
     if (axios.isAxiosError(error)) {
       console.error(`${context}:`, error.response?.data || error.message);
@@ -156,5 +117,31 @@ export class UserdashboardComponent implements OnInit {
       console.error('Unexpected error:', error);
       this.error = 'Unexpected error. Please try again later.';
     }
+  }
+
+  private handleTokenError() {
+    console.error('No JWT token found');
+    this.error = 'Authentication error. Please log in again.';
+    this.loading = false;
+    this.router.navigate(['/login']); // Redirect to login page
+  }
+
+  goToCart() {
+    this.router.navigate(['/cart']);
+  }
+
+  goToOrders() {
+    this.router.navigate(['/order-list']);
+  }
+
+  cancelPayment(){
+    this.router.navigate(['/userdash']);
+  }
+
+  logout() {
+    localStorage.removeItem('userId');
+    localStorage.removeItem('cart');
+    localStorage.removeItem('jwtToken');
+    this.router.navigate(['/login']);
   }
 }

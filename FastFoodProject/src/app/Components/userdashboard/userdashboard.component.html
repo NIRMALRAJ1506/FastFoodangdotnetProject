@@ -1,5 +1,3 @@
-<!-- Include Font Awesome CSS in your HTML file's <head> section -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <div class="mar">
   <div class="dashboard-container">
     <header class="header">
@@ -37,26 +35,47 @@
         </nav>
       </div>
   
-      <div class="content">
-        <!-- Food Items Section -->
-        <div class="food-items">
-          <div class="food-card" *ngFor="let item of filteredItems">
-            <img [src]="getImageUrl(item.imgUrl)" alt="{{ item.name }}" class="food-image">
-            <div class="food-info">
-              <h3>{{ item.name }}</h3>
-              <p>{{ item.description }}</p>
-              <p>${{ item.price.toFixed(2) }}</p>
-              <button class="add-to-cart-button" (click)="addToCart(item)">
-                <i class="fas fa-cart-plus"></i> <!-- Add to Cart icon -->
-                Add to Cart
+      <div class="container">
+        <div class="card-container">
+          <div class="card" *ngFor="let item of filteredItems">
+            <img [src]="getImageUrl(item.imgUrl)" class="card-img-top" [alt]="item.name">
+            <div class="card-body">
+              <h5 class="card-title">{{ item.name }}</h5>
+              <p class="card-text">{{ item.description }}</p>
+              <p class="card-text">${{ item.price.toFixed(2) }}</p>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-primary add-to-cart-button" (click)="addToCart(item)">
+                <i class="fas fa-cart-plus"></i> Add to Cart
               </button>
-              <button class="order-now-button" (click)="orderNow(item)">
-                <i class="fas fa-check"></i> <!-- Order Now icon -->
-                Order Now
+              <button class="btn btn-success order-now-button" (click)="openOrderModal(item)">
+                <i class="fas fa-check"></i> Order Now
               </button>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Order Confirmation Modal -->
+<div class="modal" [ngClass]="{'show': isModalVisible}" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Order</h5>
+        <button type="button" class="close" (click)="cancelPayment()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to order {{ selectedItem?.name }}?</p>
+        <p>Total Price: ${{ selectedItem?.price }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="cancelPayment()">No</button>
+        <button type="button" class="btn btn-primary" (click)="proceedToPayment()">Yes</button>
       </div>
     </div>
   </div>

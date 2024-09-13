@@ -10,6 +10,11 @@ body {
   flex-direction: column; /* Ensure body layout is column-oriented */
 }
 
+.menu-header
+{
+  margin-top: 44px;
+}
+
 .mar {
   background: url("/assets/images/background.jpg") no-repeat center center fixed;
   background-size: cover; /* Ensure background covers the entire element */

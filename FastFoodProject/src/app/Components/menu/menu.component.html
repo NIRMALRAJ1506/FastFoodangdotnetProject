@@ -1,11 +1,11 @@
 <app-navbar></app-navbar>
 <div class="mar">
 <div class="container py-5">
-    <h1 class="text-center mb-5" style="color: white;">Our Delicious Menu</h1>
+    <h1 class=" menu-header text-center mb-5" style="color: white;">Our Delicious Menu</h1>
   
     <!-- Food Items List -->
     <div class="row">
-      <div *ngFor="let foodItem of foodItems" class="col-md-4 mb-4">
+      <div *ngFor="let foodItem of foodItems" class="col-md-4 col-sm-6 mb-4">
         <div class="card h-100">
           <img [src]="foodItem.imgUrl" class="card-img-top" alt="{{ foodItem.name }}">
           <div class="card-body">
@@ -21,3 +21,9 @@
   </div>
 </div>
 <app-footer></app-footer>
+
+
+
+
+
+

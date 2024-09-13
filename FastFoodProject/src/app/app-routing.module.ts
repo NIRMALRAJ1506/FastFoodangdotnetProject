@@ -19,6 +19,7 @@ import { CartComponent } from './Components/cart/cart.component';
 import { FeedbacksComponent } from './Components/feedbacks/feedbacks.component';
 import { AuthGuard } from './shared/auth.guard';
 import { MenuComponent } from './Components/menu/menu.component';
+import { PaymentComponent } from './Components/payment/payment.component';
 
 const routes: Routes = [ 
   {path:"",component:HomeComponent},
@@ -41,6 +42,7 @@ const routes: Routes = [
 {path:'cart',component:CartComponent,canActivate:[AuthGuard]},
 {path:'feedbacks',component:FeedbacksComponent,canActivate:[AuthGuard]},
 {path:'menu',component:MenuComponent},
+{path:'payment',component:PaymentComponent},
 { path: '**', redirectTo: 'login', pathMatch: 'full' }
 
 ];
