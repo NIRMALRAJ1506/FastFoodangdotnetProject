@@ -15,6 +15,7 @@ export class AdmindashboardComponent implements OnInit {
   totalOrders: number = 0;
   chart: Chart | undefined;
   token: string | null = null;
+  showLogoutModal = false;
 
   fastFoodItems = [
     { name: 'Manage Items', link: '/manageitems' },
@@ -122,6 +123,20 @@ export class AdmindashboardComponent implements OnInit {
     }
   }
 
+  openLogoutModal() {
+    this.showLogoutModal = true;
+  }
+
+  closeLogoutModal() {
+    this.showLogoutModal = false;
+  }
+
+  confirmLogout() {
+    // Perform the logout action
+    localStorage.removeItem('jwtToken'); // Remove the token from localStorage
+    this.router.navigate(['/login']); // Redirect to the login page
+    this.showLogoutModal = false; // Close the modal after logout
+  }
   logout() {
     localStorage.removeItem('jwtToken'); // Remove the token from localStorage
     this.router.navigate(['/login']);  

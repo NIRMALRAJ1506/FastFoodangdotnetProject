@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import axios from 'axios';
 import jsPDF from 'jspdf';
 
@@ -10,8 +11,9 @@ import jsPDF from 'jspdf';
 export class OrderlistComponent implements OnInit {
   userOrders: any[] = [];
   token: string | null = null;
+  isLogoutModalVisible=false;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.token = localStorage.getItem('jwtToken');
@@ -98,4 +100,38 @@ export class OrderlistComponent implements OnInit {
     // Save the PDF with the order number in the filename
     doc.save(`Order_${order.orderNumber}.pdf`);
   }
+  goToHome() {
+    this.router.navigate(['/userdash'])
+  }
+
+  goToCart() {
+    this.router.navigate(['/cart']);
+  }
+
+  logout() {
+    this.isLogoutModalVisible = true;
+  }
+
+  // Confirm logout and perform logout actions
+  confirmLogout() {
+    localStorage.removeItem('userId');
+    localStorage.removeItem('cart');
+    localStorage.removeItem('jwtToken');
+    this.isLogoutModalVisible = false;
+    this.router.navigate(['/login']);
+  }
+
+  // Cancel logout and close the modal
+  cancelLogout() {
+    this.isLogoutModalVisible = false;
+  }
+  showProfile() {
+    this.router.navigate(['/user-profile']);
+  }
+
+  showLogoutModal() {
+    this.isLogoutModalVisible = true;
+  }
+
+  
 }

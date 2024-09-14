@@ -9,6 +9,8 @@ import { UserService } from '../../shared/services/user.service'; // Adjust the 
 })
 export class SignupComponent implements OnInit {
   signupForm!: FormGroup; // Non-null assertion operator
+  isModalVisible = false; // Modal visibility state
+  successMessage: string = 'User Added Successfully';
 
   constructor(private fb: FormBuilder, private userService: UserService) {}
 
@@ -31,6 +33,7 @@ export class SignupComponent implements OnInit {
         .then(response => {
           console.log('User registration successful', response);
           this.signupForm.reset(); // Reset form after successful submission
+          this.openModal(); // Open the success modal
         })
         .catch(error => {
           console.error('Error during user registration', error);
@@ -38,5 +41,13 @@ export class SignupComponent implements OnInit {
     } else {
       console.error('Form is invalid');
     }
+  }
+
+  openModal(): void {
+    this.isModalVisible = true; // Show the modal
+  }
+
+  closeModal(): void {
+    this.isModalVisible = false; // Hide the modal
   }
 }

@@ -1,23 +1,24 @@
+<header class="header">
+  <button class="menu-button" (click)="toggleMenu()">
+    <i class="fas fa-bars"></i> <!-- Menu icon -->
+  </button>
+  <h1><img class="logo" src="/assets/images/logo.JPG"></h1>
+  <div class="button-group">
+    <button class="show-profile-button" (click)="showProfile()">
+      <i class="fas fa-user"></i> <!-- Show Profile icon -->
+    </button>
+    <button class="view-cart-button" (click)="goToCart()">
+      <i class="fas fa-shopping-cart"></i> <!-- View Cart icon -->
+    </button>
+    <button class="logout-button" (click)="logout()">
+      <i class="fas fa-sign-out-alt"></i> <!-- Logout icon -->
+    </button>
+  </div>
+</header>
 <div class="mar">
   <div class="dashboard-container">
-    <header class="header">
-      <button class="menu-button" (click)="toggleMenu()">
-        <i class="fas fa-bars"></i> <!-- Menu icon -->
-      </button>
-      <h1><img class="logo" src="/assets/images/logo.JPG"></h1>
-      <div class="button-group">
-        <button class="show-profile-button" (click)="showProfile()">
-          <i class="fas fa-user"></i> <!-- Show Profile icon -->
-        </button>
-        <button class="view-cart-button" (click)="goToCart()">
-          <i class="fas fa-shopping-cart"></i> <!-- View Cart icon -->
-        </button>
-        <button class="logout-button" (click)="logout()">
-          <i class="fas fa-sign-out-alt"></i> <!-- Logout icon -->
-        </button>
-      </div>
-    </header>
-  
+    
+
     <div class="main-content">
       <div class="sidebar" *ngIf="showMenu">
         <nav class="nav-menu">
@@ -34,7 +35,7 @@
           </ul>
         </nav>
       </div>
-  
+
       <div class="container">
         <div class="card-container">
           <div class="card" *ngFor="let item of filteredItems">
@@ -59,6 +60,13 @@
   </div>
 </div>
 
+<!-- Item Added to Cart Notification -->
+<div class="notification" *ngIf="isNotificationVisible">
+  <div class="notification-content">
+    <p>{{ notificationMessage }}</p>
+  </div>
+</div>
+
 <!-- Order Confirmation Modal -->
 <div class="modal" [ngClass]="{'show': isModalVisible}" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
@@ -76,6 +84,29 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="cancelPayment()">No</button>
         <button type="button" class="btn btn-primary" (click)="proceedToPayment()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Existing HTML content -->
+
+<!-- Logout Confirmation Modal -->
+<div class="modal" [ngClass]="{'show': isLogoutModalVisible}" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Logout</h5>
+        <button type="button" class="close" (click)="cancelLogout()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to log out?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="cancelLogout()">No</button>
+        <button type="button" class="btn btn-primary" (click)="confirmLogout()">Yes</button>
       </div>
     </div>
   </div>

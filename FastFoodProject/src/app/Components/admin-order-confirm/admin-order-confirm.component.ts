@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import axios from 'axios';
 
 @Component({
@@ -11,7 +12,10 @@ export class AdminOrderConfirmComponent implements OnInit {
   loading = true;
   error: string | null = null;
   token: string | null = null; // Ensure token is of type string | null
+  menuVisible=true;
+  showLogoutModal=false;
 
+  constructor(private router: Router) { }
   ngOnInit(): void {
     this.token = localStorage.getItem('jwtToken');
     
@@ -65,5 +69,23 @@ export class AdminOrderConfirmComponent implements OnInit {
       console.error('Error updating order:', error);
       this.error = 'Error updating order. Please try again later.';
     }
+  }
+  toggleMenu() {
+    this.menuVisible = !this.menuVisible;
+  }
+
+  openLogoutModal() {
+    this.showLogoutModal = true;
+  }
+
+  closeLogoutModal() {
+    this.showLogoutModal = false;
+  }
+
+  confirmLogout() {
+    // Perform the logout action
+    localStorage.removeItem('jwtToken'); // Remove the token from localStorage
+    this.router.navigate(['/login']); // Redirect to the login page
+    this.showLogoutModal = false; // Close the modal after logout
   }
 }

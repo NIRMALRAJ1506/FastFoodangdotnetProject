@@ -9,6 +9,7 @@ import axios from 'axios';
 })
 export class ContactUsComponent {
   contactForm: FormGroup;
+  showNotification: boolean = false;
 
   constructor(private fb: FormBuilder) {
     // Initialize the form group
@@ -27,7 +28,13 @@ export class ContactUsComponent {
       axios.post('http://localhost:5270/api/feedback', feedbackData)
         .then(response => {
           console.log('Feedback submitted successfully:', response.data);
-          alert('Thank you for your feedback!');
+          this.showNotification = true;
+      
+      // Reset the form after submission
+      this.contactForm.reset();
+      
+      // Optionally hide notification after some time
+      setTimeout(() => this.showNotification = false, 5000);
           this.contactForm.reset(); // Reset the form after successful submission
         })
         .catch(error => {

@@ -1,6 +1,28 @@
+<header class="header">
+  <h1><img class="logo" src="/assets/images/logo.JPG"></h1>
+  <div class="button-group">
+    <div class="show-profile-button">
+      <i class="fas fa-home" (click)="goToHome()"></i>
+    </div>
+    <button class="show-profile-button" (click)="showProfile()">
+      <i class="fas fa-user"></i> <!-- Show Profile icon -->
+    </button>
+    <button class="view-cart-button" (click)="goToCart()">
+      <i class="fas fa-shopping-cart"></i> <!-- View Cart icon -->
+    </button>
+    <button class="logout-button" (click)="showLogoutModal()">
+      <i class="fas fa-sign-out-alt"></i> <!-- Logout icon -->
+    </button>
+    
+  </div>
+</header>
 <div class="mar">
+  
   <div class="orders-container">
     <h2>Your Orders</h2>
+
+    <!-- Home icon in the top right corner -->
+   
 
     <div *ngIf="userOrders.length > 0; else noOrders">
       <div *ngFor="let order of userOrders" class="order-card">
@@ -50,4 +72,22 @@
     </ng-template>
   </div>
 </div>
-orderlist html
+<div class="modal" [ngClass]="{'show': isLogoutModalVisible}" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Logout</h5>
+        <button type="button" class="close" (click)="cancelLogout()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to logout?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="cancelLogout()">No</button>
+        <button type="button" class="btn btn-primary" (click)="confirmLogout()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>

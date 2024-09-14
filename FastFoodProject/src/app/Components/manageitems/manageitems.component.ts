@@ -15,6 +15,11 @@ export class ManageitemsComponent implements OnInit {
   showAddItemForm: boolean = false;
   editingItem: any = null; // For editing existing items
   token: any;
+  showDeleteConfirmation: boolean = false;
+  itemToDelete: any = null;
+  notification: { message: string, type: string } | null = null; // Add type for notification
+  menuVisible = true;
+  showLogoutModal = false;
 
   newItem: any = {
     name: '',
@@ -29,6 +34,7 @@ export class ManageitemsComponent implements OnInit {
   ngOnInit(): void {
     this.token = localStorage.getItem('jwtToken');
     this.loadFoodItems();
+    this.showDeleteConfirmation = false; 
   }
 
   async loadFoodItems() {
@@ -76,7 +82,7 @@ export class ManageitemsComponent implements OnInit {
             Authorization: `Bearer ${this.token}`
           }
         });
-        console.log('Item updated successfully');
+        this.notification = { message: 'Item updated successfully', type: 'success' };
       } else {
         const response = await axios.post('http://localhost:5270/api/FoodItems', this.newItem, {
           headers: {
@@ -84,27 +90,54 @@ export class ManageitemsComponent implements OnInit {
           }
         });
         this.foodItems.push(response.data); // Add new item to the list
+        this.notification = { message: 'Item added successfully', type: 'success' };
       }
 
       this.loadFoodItems();
       this.resetForm();
-
+      this.showNotification();
     } catch (error) {
       console.error('Error adding/updating item:', error);
+      this.notification = { message: 'Error occurred', type: 'error' };
+      this.showNotification();
     }
   }
 
+  showNotification() {
+    setTimeout(() => {
+      this.notification = null; // Hide notification after 3 seconds
+    }, 3000);
+  }
+
   async deleteItem(id: number) {
-    try {
-      await axios.delete(`http://localhost:5270/api/fooditems/${id}`, {
-        headers: {
-          Authorization: `Bearer ${this.token}`
-        }
-      });
-      this.loadFoodItems();
-    } catch (error) {
-      console.error('Error deleting food item', error);
+    this.itemToDelete = id;
+    this.showDeleteConfirmation = true;  // Show confirmation modal when delete is clicked
+  }
+
+  async confirmDelete() {
+    if (this.itemToDelete) {
+      try {
+        await axios.delete(`http://localhost:5270/api/fooditems/${this.itemToDelete}`, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          }
+        });
+        this.loadFoodItems();
+        this.itemToDelete = null;  // Clear item to delete
+        this.showDeleteConfirmation = false;  // Close confirmation modal
+        this.notification = { message: 'Item deleted successfully', type: 'success' };
+        this.showNotification();
+      } catch (error) {
+        console.error('Error deleting food item', error);
+        this.notification = { message: 'Error occurred', type: 'error' };
+        this.showNotification();
+      }
     }
+  }
+
+  cancelDelete() {
+    this.itemToDelete = null;  // Clear item to delete
+    this.showDeleteConfirmation = false;  // Close confirmation modal
   }
 
   getImageUrl(imgUrl: string): string {
@@ -123,8 +156,31 @@ export class ManageitemsComponent implements OnInit {
     this.editingItem = null;
   }
 
+  navigateToAdminDash() {
+    this.router.navigate(['/admindash']);
+  }
+
   logout() {
     localStorage.removeItem('jwtToken');
     this.router.navigate(['/home']);
+  }
+
+  toggleMenu() {
+    this.menuVisible = !this.menuVisible;
+  }
+
+  openLogoutModal() {
+    this.showLogoutModal = true;
+  }
+
+  closeLogoutModal() {
+    this.showLogoutModal = false;
+  }
+
+  confirmLogout() {
+    // Perform the logout action
+    localStorage.removeItem('jwtToken'); // Remove the token from localStorage
+    this.router.navigate(['/login']); // Redirect to the login page
+    this.showLogoutModal = false; // Close the modal after logout
   }
 }

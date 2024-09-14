@@ -1,6 +1,6 @@
-// manage-users.component.ts
 import { Component, OnInit } from '@angular/core';
 import axios from 'axios';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manage-users',
@@ -12,9 +12,13 @@ export class ManageUsersComponent implements OnInit {
   loading = true;
   error: string | null = null;
   selectedUser: any = null; // For holding user data when updating
+  selectedUserId: number | null = null; // For holding user ID when deleting
   isEditing = false; // Flag to show/hide the update form
+  menuVisible = true;
+  showLogoutModal = false;
+  showDeleteModal = false; // Flag to show/hide delete confirmation modal
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.fetchUsers();
@@ -36,9 +40,29 @@ export class ManageUsersComponent implements OnInit {
     try {
       await axios.delete(`http://localhost:5270/api/user/${userId}`);
       this.users = this.users.filter(user => user.id !== userId);
+      this.showDeleteModal = false; // Close the modal after deletion
     } catch (error) {
       console.error('Error deleting user:', error);
     }
+  }
+
+  // Open the delete confirmation modal
+  openDeleteModal(userId: number) {
+    this.selectedUserId = userId;
+    this.showDeleteModal = true;
+  }
+
+  // Confirm the deletion
+  confirmDelete() {
+    if (this.selectedUserId !== null) {
+      this.deleteUser(this.selectedUserId);
+    }
+  }
+
+  // Cancel the deletion and close the modal
+  closeDeleteModal() {
+    this.showDeleteModal = false;
+    this.selectedUserId = null;
   }
 
   // Open the update form and select the user to be updated
@@ -47,21 +71,27 @@ export class ManageUsersComponent implements OnInit {
     this.isEditing = true;
   }
 
-  // async updateUser() {
-  //   try {
-  //     await axios.put(`http://localhost:5270/api/user/${this.selectedUser.id}`, this.selectedUser);
-  //     this.users = this.users.map(user =>
-  //       user.id === this.selectedUser.id ? { ...this.selectedUser } : user
-  //     );
-  //     this.isEditing = false;
-  //     this.selectedUser = null;
-  //   } catch (error) {
-  //     console.error('Error updating user:', error);
-  //   }
-  // }
-
   cancelEdit() {
     this.isEditing = false;
     this.selectedUser = null;
+  }
+
+  toggleMenu() {
+    this.menuVisible = !this.menuVisible;
+  }
+
+  openLogoutModal() {
+    this.showLogoutModal = true;
+  }
+
+  closeLogoutModal() {
+    this.showLogoutModal = false;
+  }
+
+  confirmLogout() {
+    // Perform the logout action
+    localStorage.removeItem('jwtToken'); // Remove the token from localStorage
+    this.router.navigate(['/login']); // Redirect to the login page
+    this.showLogoutModal = false; // Close the modal after logout
   }
 }

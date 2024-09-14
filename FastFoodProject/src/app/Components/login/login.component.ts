@@ -12,6 +12,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   roles = ['User', 'Admin']; // Dropdown options
   loginError: string | null = null; // To display error messages
+  showModal = false; // To control modal visibility
 
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
     this.loginForm = this.fb.group({
@@ -36,7 +37,6 @@ export class LoginComponent {
 
         if (token) {
           // Save JWT token in localStorage
-          
           this.loginError = null; // Reset error message
           
           // Redirect based on role
@@ -50,10 +50,13 @@ export class LoginComponent {
         }
       } catch (error) {
         console.error('Login failed', error);
-        this.loginError = 'Invalid username or password'; // Set an appropriate error message
+        this.loginError = 'Invalid username or password';
+        this.showModal = true; // Show modal on error
       }
-    } else {
-      console.error('Form is invalid');
     }
+  }
+
+  closeModal() {
+    this.showModal = false;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import axios from 'axios';
 
@@ -12,8 +12,10 @@ export class CartComponent implements OnInit {
   totalPrice: number = 0;
   token: string | null = null;
   showSidebar: boolean = false; // To control sidebar visibility
+  showModal: boolean = false; 
+  showLogoutModal: boolean = false; // Added for logout confirmation modal
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.token = localStorage.getItem('jwtToken');
@@ -65,6 +67,8 @@ export class CartComponent implements OnInit {
       console.log('Order created successfully', response.data); // Log response
       localStorage.removeItem('cart'); // Clear cart after successful order
       this.router.navigate(['/order-confirmation', response.data.id]);
+      this.showModal = true; // Show the modal on success
+      this.cdr.detectChanges(); // Ensure change detection picks up the change
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.error('Axios error response:', error.response?.data);
@@ -110,8 +114,21 @@ export class CartComponent implements OnInit {
     this.router.navigate(['/user-profile']); // Adjust route as necessary
   }
 
-  logout() {
-    localStorage.removeItem('jwtToken');
-    this.router.navigate(['/login']);
+  closeModal() {
+    this.showModal = false; // Hide the modal when the close button or OK button is clicked
+  }
+
+  showLogoutConfirmation() {
+    this.showLogoutModal = true; // Show logout confirmation modal
+  }
+
+  closeLogoutModal() {
+    this.showLogoutModal = false; // Hide the logout confirmation modal
+  }
+
+  confirmLogout() {
+    localStorage.removeItem('jwtToken'); // Clear the token
+    this.router.navigate(['/login']); // Redirect to login
+    this.closeLogoutModal(); // Hide the modal
   }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import axios from 'axios';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-feedbacks',
@@ -8,7 +9,10 @@ import axios from 'axios';
 })
 export class FeedbacksComponent {
   feedbacks: any[] = [];
+  menuVisible=true;
+  showLogoutModal=false;
 
+  constructor(private router: Router) {}
   ngOnInit(): void {
     this.loadFeedbacks();
   }
@@ -21,5 +25,24 @@ export class FeedbacksComponent {
       .catch(error => {
         console.error('Error fetching feedbacks:', error);
       });
+    }
+
+    toggleMenu() {
+      this.menuVisible = !this.menuVisible;
+    }
+
+    openLogoutModal() {
+      this.showLogoutModal = true;
+    }
+  
+    closeLogoutModal() {
+      this.showLogoutModal = false;
+    }
+  
+    confirmLogout() {
+      // Perform the logout action
+      localStorage.removeItem('jwtToken'); // Remove the token from localStorage
+      this.router.navigate(['/login']); // Redirect to the login page
+      this.showLogoutModal = false; // Close the modal after logout
     }
   }

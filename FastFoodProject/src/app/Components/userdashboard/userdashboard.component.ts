@@ -17,7 +17,10 @@ export class UserdashboardComponent implements OnInit {
   token: string | null = null;
   loading: boolean = true;
   error: string | null = null;
-  isModalVisible: boolean = false; // Control modal visibility
+  isModalVisible: boolean = false; // Control item order modal visibility
+  isNotificationVisible: boolean = false; // Control notification visibility
+  notificationMessage: string = ''; // Notification message
+  isLogoutModalVisible: boolean = false; // Control logout confirmation modal visibility
 
   constructor(private router: Router) {}
 
@@ -41,7 +44,7 @@ export class UserdashboardComponent implements OnInit {
           'Authorization': `Bearer ${this.token}`
         }
       });
-      
+
       this.foodItems = response.data;
       this.filteredItems = this.foodItems;
       this.extractFoodTypes();
@@ -70,26 +73,23 @@ export class UserdashboardComponent implements OnInit {
     return `${imageName}`;
   }
 
-  // Opens the modal when "Order Now" is clicked
   openOrderModal(item: any) {
     this.selectedItem = item; // Store the selected item
     this.isModalVisible = true; // Show the modal
   }
 
-  // Proceed with the order when "Yes" is clicked
   async proceedToPayment() {
     if (!this.selectedItem) {
       this.error = 'No item selected for order.';
       return;
     }
-  
+
     // Pass the selected item information to the payment page
     localStorage.setItem('selectedFoodItem', JSON.stringify(this.selectedItem));
-  
+
     // Redirect to payment page
     this.router.navigate(['/payment']);
   }
-  
 
   addToCart(item: any) {
     let cart = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -102,7 +102,17 @@ export class UserdashboardComponent implements OnInit {
     }
 
     localStorage.setItem('cart', JSON.stringify(cart));
-    alert('Item added to cart');
+    this.showNotification(`Item "${item.name}" added to cart.`);
+  }
+
+  showNotification(message: string) {
+    this.notificationMessage = message;
+    this.isNotificationVisible = true;
+
+    // Hide notification after 3 seconds
+    setTimeout(() => {
+      this.isNotificationVisible = false;
+    }, 3000);
   }
 
   showProfile() {
@@ -134,14 +144,26 @@ export class UserdashboardComponent implements OnInit {
     this.router.navigate(['/order-list']);
   }
 
-  cancelPayment(){
+  cancelPayment() {
     this.router.navigate(['/userdash']);
   }
 
+  // Show logout confirmation modal
   logout() {
+    this.isLogoutModalVisible = true;
+  }
+
+  // Confirm logout and perform logout actions
+  confirmLogout() {
     localStorage.removeItem('userId');
     localStorage.removeItem('cart');
     localStorage.removeItem('jwtToken');
+    this.isLogoutModalVisible = false;
     this.router.navigate(['/login']);
+  }
+
+  // Cancel logout and close the modal
+  cancelLogout() {
+    this.isLogoutModalVisible = false;
   }
 }

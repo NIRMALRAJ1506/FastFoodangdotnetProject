@@ -2,15 +2,23 @@
 
 .dashboard-container {
   font-family: Arial, sans-serif;
+  padding-top: 60px; /* Add space below the fixed header */
 }
 
+/* Header */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 10px 20px; /* Adjust padding for spacing */
   background-color: #333;
   color: #fff;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Ensure it stays on top of other content */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
 }
 
 .menu-button, .logout-button {
@@ -25,8 +33,10 @@
   background-color: #0056b3;
 }
 
+/* Main Content */
 .main-content {
   display: flex;
+  margin-top: 10px; /* Add margin to push content below the fixed header */
 }
 
 .sidebar {
@@ -58,6 +68,7 @@
   padding: 20px;
 }
 
+/* Statistics Section */
 .statistics {
   display: flex;
   justify-content: space-between;
@@ -86,6 +97,7 @@
   color: #007bff;
 }
 
+/* Chart Container */
 .chart-container {
   background-color: #333; /* Dark background for the chart container */
   padding: 20px;
@@ -102,15 +114,77 @@
   height: 300px; /* Set the height for the chart */
 }
 
-.mar{
-  background: url("/assets/images/background.jpg");
-  height: 100vh;
+/* Background */
+.mar {
+  background: url("/assets/images/background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
 }
 
+/* Logo */
 .logo {
   max-width: 100%; /* Ensures the logo doesn't exceed the container width */
   height: auto; /* Maintains aspect ratio */
-  width: 200px;
-  height:50px; /* Adjust as needed */
+  width: 150px; /* Adjusted width */
+  height: 40px; /* Adjust as needed */
   transition: width 0.3s ease; /* Smooth transition for resizing */
+}
+
+/* Modal Styling */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-dialog {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  text-align: center;
+}
+
+.modal-header h2 {
+  margin: 0 0 20px;
+}
+
+.modal-body {
+  margin-bottom: 20px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn {
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
 }

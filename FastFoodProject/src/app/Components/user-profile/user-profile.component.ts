@@ -13,6 +13,9 @@ export class UserProfileComponent implements OnInit {
   isEditing: boolean = false;
   token: any;
   showMenu: boolean = false; // Sidebar state
+  updateNotification: string | null = null; // Notification for profile update
+  isDeleteModalVisible: boolean = false; // Control delete confirmation modal visibility
+  isLogoutModalVisible: boolean = false; // Control logout confirmation modal visibility
 
   constructor(private router: Router) {
     this.userId = +localStorage.getItem('userId')!;
@@ -31,9 +34,21 @@ export class UserProfileComponent implements OnInit {
         }
       });
       this.userDetails = response.data;
+      if (this.userDetails.dob) {
+        // Convert date to YYYY-MM-DD format
+        this.userDetails.dob = this.formatDateForInput(this.userDetails.dob);
+      }
     } catch (error) {
       console.error('Error fetching user details', error);
     }
+  }
+
+  formatDateForInput(dateString: string): string {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 
   editProfile() {
@@ -42,6 +57,9 @@ export class UserProfileComponent implements OnInit {
 
   async updateProfile() {
     try {
+      if (this.userDetails.dob) {
+        this.userDetails.dob = this.formatDateForInput(new Date(this.userDetails.dob).toISOString());
+      }
       await axios.put(`http://localhost:5270/api/user/${this.userId}`, this.userDetails, {
         headers: {
           'Authorization': `Bearer ${this.token}`
@@ -49,6 +67,8 @@ export class UserProfileComponent implements OnInit {
       });
       this.isEditing = false;
       await this.fetchUserDetails();
+      this.updateNotification = 'User Details Updated Successfully';
+      setTimeout(() => this.updateNotification = null, 3000);
     } catch (error) {
       console.error('Error updating user profile', error);
     }
@@ -58,7 +78,11 @@ export class UserProfileComponent implements OnInit {
     this.isEditing = false;
   }
 
-  async deleteProfile() {
+  showDeleteModal() {
+    this.isDeleteModalVisible = true;
+  }
+
+  async confirmDelete() {
     try {
       await axios.delete(`http://localhost:5270/api/user/${this.userId}`, {
         headers: {
@@ -69,6 +93,14 @@ export class UserProfileComponent implements OnInit {
     } catch (error) {
       console.error('Error deleting user profile', error);
     }
+  }
+
+  cancelDelete() {
+    this.isDeleteModalVisible = false;
+  }
+
+  deleteProfile() {
+    this.showDeleteModal();
   }
 
   showProfile() {
@@ -87,12 +119,27 @@ export class UserProfileComponent implements OnInit {
     this.router.navigate(['/userdash']);
   }
 
-  logout() {
+  showLogoutModal() {
+    this.isLogoutModalVisible = true;
+  }
+
+  confirmLogout() {
     localStorage.removeItem('userId');
-    this.router.navigate(['/home']);
+    localStorage.removeItem('jwtToken');
+    this.router.navigate(['/login']);
+  }
+
+  cancelLogout() {
+    this.isLogoutModalVisible = false;
+  }
+
+  logout() {
+    this.showLogoutModal();
   }
 
   toggleSidebar() {
     this.showMenu = !this.showMenu;
   }
+
+  
 }
